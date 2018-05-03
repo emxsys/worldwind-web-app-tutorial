@@ -46,7 +46,7 @@ We're going to add the CDN links for the Bootstrap and Font Awesome CSS, plus
 a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
 for BootStrap and JQuery, plus our **app.js** file. 
 
-Edit the web page so that it looks like the following HTML:
+Copy/paste the following HTML into your web page:
 
 ```html
 <!doctype html>
@@ -79,14 +79,15 @@ Edit the web page so that it looks like the following HTML:
 </html>
 ```
  
-Feel edit the `<title>`. The `<meta>` elements above are important for Bootstrap and 
-must be included. You can add other `<meta>` elements like author, description, etc. 
+The `<meta>` elements above are important for Bootstrap and must be included. 
+You can add other `<meta>` elements like author, description, etc. Feel fee to 
+edit the `<title>`.
 
 
 ### NavBar: The Main Menu
 
 Our web app uses a Bootstrap [Navbar](https://getbootstrap.com/docs/4.0/components/navbar/) 
-component to render the main menu at the top of the page. The Navbar is responsive: 
+component to create the main menu at the top of the page. The Navbar is responsive: 
 it automatically adjusts its layout based on the page width. We'll go ahead add 
 menu items all for the features that we will implement, including:
 
@@ -162,7 +163,7 @@ Now we'll add the elements that will host the globe, layers, markers and setting
 These elements won't have much to display at this stage, but they will be wired
 up to the menu system.
 
-Copy/paste the following block of HTML at the below the `<nav/>` element:
+Copy/paste the following block of HTML the below the closing `<nav/>` element:
 
 ```html
 <!-- Use container-fluid for 100% width and set padding to 0 -->
@@ -235,7 +236,7 @@ Copy/paste the following block of HTML at the below the `<nav/>` element:
 
 Also copy/paste the following CSS into the custom.css file. This CSS adds some 
 padding to the top of the `body` element so that children do not display under the 
-Navbar.
+Navbar. It also defines some custom CSS classes.
 
 ```css
 body {
@@ -258,8 +259,8 @@ body {
 ```
 
 Finally, copy/past the following JavaScript into your app.js file. This code
-adds an event handlers make the main menu easier to work with on small screens,
-and a handler that closes panels when their close icon is clicked.
+adds an event handler make the main menu easier to work with on small screens,
+and it adds a handler that closes panels when their close icon is clicked.
 
 ```javascript
 $(document).ready(function() {
@@ -282,7 +283,7 @@ $(document).ready(function() {
 
 At this stage you have a functioning prototype of the web app.  
 
-Here's the complete code for this lesson.
+Here's the complete code for this lesson: a web app prototype sans globe.
 <script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
 
 Following are some explanations of the components used in the HTML. If you're not
@@ -322,6 +323,13 @@ web page:
 ```html
 <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
 ```
+
+### Create the Globe class
+
+
+Here's the complete code for this lesson: a web app prototype with a WorldWind globe.
+
+<script async src="//jsfiddle.net/emxsys/7x6vcf78/embed/"></script>
 
 ## Lesson 3: Layer Management
 - Configure layers and layer categories
