@@ -1,14 +1,14 @@
 # How to Build a WorldWind Web App
 
-In this tutorial, you will learn how to build WorldWind web app using Bootstrap and Knockout. Upon completion 
-you will have a feature-rich, responsive web application ready for customization. The finished web app features a 
-WorldWind globe with layer management and geocoding. The WorldWind topics that are covered include:
+This tutorial shows you how to build WorldWind web app using Bootstrap and Knockout. 
+You will build have a feature-rich, responsive, customizable web app ready to 
+to be deployed to your site. The finished web app demonstrates:
 
-- Initializing a WorldWind globe (3D globe and 2D map projections)
+- Initializing WorldWind with 3D globes and/or 2D maps
 - Configuring and managing layers and settings
 - Place name searches and geocoding
 - Creating placemarks
-- Go to locations
+- Going to locations
 - Multi-globe support
 
 This tutorial makes use of the [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) and [Knockout](http://knockoutjs.com/index.html) libraries. 
@@ -18,7 +18,10 @@ Knockout is a library that helps you update sections of UI that update dynamical
 
 ## Quick Start
 
-Do you want to get started with 
+Do you want to get started developing with the WorldWind web app right away? 
+
+- Download the source here: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
+- View the completed tutorial here: [Final Result] (https://jsfiddle.net/emxsys/e0a2z1km/)
 
 ## Lesson 1: HTML with Bootstrap
 - Responsive web app template for mobiles, tablets and desktops.
