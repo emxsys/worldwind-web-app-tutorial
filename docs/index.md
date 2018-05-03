@@ -282,6 +282,7 @@ $(document).ready(function() {
 
 At this stage you have a functioning prototype of the web app.  
 
+Here's the complete code for this lesson.
 <script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
 
 Following are some explanations of the components used in the HTML. If you're not
