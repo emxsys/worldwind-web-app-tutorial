@@ -1,8 +1,24 @@
 # How to Build a WorldWind Web App
 
-In this tutorial, you will learn how to build WorldWind web app using 
-Bootstrap and Knockout.  Upon completion you will have a feature-rich 
-web application template ready for customization.
+In this tutorial, you will learn how to build WorldWind web app using Bootstrap and Knockout. Upon completion 
+you will have a feature-rich, responsive web application ready for customization. The finished web app features a 
+WorldWind globe with layer management and geocoding. The WorldWind topics that are covered include:
+
+- Initializing a WorldWind globe (3D globe and 2D map projections)
+- Configuring and managing layers and settings
+- Place name searches and geocoding
+- Creating placemarks
+- Go to locations
+- Multi-globe support
+
+This tutorial makes use of the [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) and [Knockout](http://knockoutjs.com/index.html) libraries. 
+Bootstrap is the world's most popular framework for building responsive, mobile-first sites. 
+Knockout is a library that helps you update sections of UI that update dynamically 
+(e.g., changing depending on the user's actions or when a WorldWind component changes).
+
+## Quick Start
+
+Do you want to get started with 
 
 ## Lesson 1: HTML with Bootstrap
 - Responsive web app template for mobiles, tablets and desktops.
@@ -44,9 +60,11 @@ Just before the `</body>` tag, add the JavaScript dependencies for BootStrap and
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
 ```
 
-### NavBar: main-menu
+### NavBar: Main menu
 
-Our web app will use a Bootstrap [Navbar](https://getbootstrap.com/docs/4.0/components/navbar/) component to render our main menu at the top of the page. The Navbar is responsive: it will automatically adjust its layout based on the page width.
+Our web app uses a Bootstrap [Navbar](https://getbootstrap.com/docs/4.0/components/navbar/) 
+component to render the main menu at the top of the page. The Navbar is responsive: 
+it automatically adjusts its layout based on the page width.
 
 The Navbar component is placed the beginning of the `<body>` element.
 
@@ -98,7 +116,6 @@ We'll add menu items for the features that we will implement in this tutorial, i
         </form>
     </div>
 </nav>
-
 ```
 
 ### Main element
@@ -125,9 +142,13 @@ body {
 }
 ```
 
-### Cards: panels for layers and settings
 
-We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) components to host the WorldWind layers and settings content. 
+### Cards: Panels for layers and settings
+
+We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) components 
+to host the WorldWind layers and settings content. Bootstrap includes a few options for 
+laying out a series of cards. We'll use Masonry-like columns by wrapping them in `.card-columns`.
+
 
 
 
