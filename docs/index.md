@@ -40,12 +40,11 @@ If you want to start with a Bootstrap example, you can download this template:
 
 ### Dependencies 
 
-Edit the of your web page so that it looks like the following HTML. 
+We're going to add the CDN links for the Bootstrap and Font Awesome CSS, plus
+a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
+for BootStrap and JQuery, plus our **app.js** file. 
 
-We're adding the CDN links for the Bootstrap and Font Awesome CSS, plus
-a link to our *custom.css* file. Also, we're adding the JavaScript CDN links 
-for BootStrap and JQuery plus our *app.js* file.  The `<meta>` elements are
-important for Bootstrap and must be included. 
+Edit the of your web page so that it looks like the following HTML:
 
 ```html
 <!doctype html>
@@ -77,9 +76,9 @@ important for Bootstrap and must be included.
     </body
 </html>
 ```
-
-You can you edit the `<title>` and you can add other `<meta>` elements like author 
-and description. 
+ 
+Feel edit the `<title>`. The `<meta>` elements above are important for Bootstrap and 
+must be included. You can add other `<meta>` elements like author, description, etc. 
 
 
 ### NavBar: Main menu
