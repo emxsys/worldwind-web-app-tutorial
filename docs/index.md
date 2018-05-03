@@ -154,7 +154,7 @@ the browser and watch how the menu responds. Also open your browser's developmen
 tools and try out the page using the mobile emulation settings.
 
 PS: You can also replace the `.navbar-dark` and `.bg-dark` with alternatives to 
-change the look 
+change the style. 
 
 ### Main Content
 
@@ -265,6 +265,10 @@ and a handler that closes panels when their close icon is clicked.
 $(document).ready(function() {
   "use strict";
 
+  // Create a globe
+  let wwd = new WorldWind.WorldWind("globe-canvas");
+  wwd.addLayer(new WorldWind.BMNGOneImageLayer());
+
   // Auto-collapse the main menu when its button items are clicked
   $('.navbar-collapse a[role="button"]').click(function() {
     $('.navbar-collapse').collapse('hide');
@@ -276,9 +280,12 @@ $(document).ready(function() {
 });
 ```
 
-At this stage you have a functioning prototype of the web app.  Following are
-some explanations of the components used in the HTML. If you're not interested
-you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
+At this stage you have a functioning prototype of the web app.  
+
+<script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
+
+Following are some explanations of the components used in the HTML. If you're not
+interested you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
 
 #### Full Width and Padding
 The `<main/>` element, above, hosts main content of our web app. We want the 
