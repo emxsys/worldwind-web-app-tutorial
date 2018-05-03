@@ -1,8 +1,8 @@
 # How to Build a WorldWind Web App
 
-This tutorial shows you how to build WorldWind web app using Bootstrap and Knockout. 
-You will build have a feature-rich, responsive, customizable web app ready to 
-to be deployed to your site. The finished web app demonstrates:
+This tutorial shows you how to build [WorldWind](https://worldwind.arc.nasa.gov/web/) web app using Bootstrap and Knockout. 
+You will build a feature-rich, responsive, customizable web app ready to 
+to be deployed to your site. This tutorial demonstrates:
 
 - Initializing WorldWind with 3D globes and/or 2D maps
 - Configuring and managing layers and settings
@@ -12,16 +12,15 @@ to be deployed to your site. The finished web app demonstrates:
 - Multi-globe support
 
 This tutorial makes use of the [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) and [Knockout](http://knockoutjs.com/index.html) libraries. 
-Bootstrap is the world's most popular framework for building responsive, mobile-first sites. 
-Knockout is a library that helps you update sections of UI that update dynamically 
-(e.g., changing depending on the user's actions or when a WorldWind component changes).
+
+If your are interested WorldWind web app using [React](https://reactjs.org)? Look here: [WorldWind React]{https://github.com/emxsys/worldwind-react-app}.
 
 ## Quick Start
 
 Do you want to get started developing with the WorldWind web app right away? 
 
-- Download the source here: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
-- View the completed tutorial here: [Final Result] (https://jsfiddle.net/emxsys/e0a2z1km/)
+- Download the source: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
+- View the completed tutorial: [Final Result](https://jsfiddle.net/emxsys/e0a2z1km/)
 
 ## Lesson 1: HTML with Bootstrap
 - Responsive web app template for mobiles, tablets and desktops.
