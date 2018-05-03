@@ -1,6 +1,6 @@
 # How to Build a WorldWind Web App
 
-This tutorial shows you how to build [WorldWind](https://worldwind.arc.nasa.gov/web/) web app using Bootstrap and Knockout. 
+This tutorial shows you how to build [WorldWind](https://worldwind.arc.nasa.gov/web/). 
 You will build a feature-rich, responsive, customizable web app ready to 
 to be deployed to your site. This tutorial demonstrates:
 
@@ -11,9 +11,9 @@ to be deployed to your site. This tutorial demonstrates:
 - Going to locations
 - Multi-globe support
 
-This tutorial makes use of the [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) and [Knockout](http://knockoutjs.com/index.html) libraries. 
+This web app makes use of the [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) and [Knockout](http://knockoutjs.com/index.html) libraries. 
 
-If your are interested WorldWind web app using [React](https://reactjs.org)? Look here: [WorldWind React]{https://github.com/emxsys/worldwind-react-app}.
+Are you interested WorldWind web app using [React](https://reactjs.org)? Look here: [WorldWind React](https://github.com/emxsys/worldwind-react-app).
 
 ## Quick Start
 
