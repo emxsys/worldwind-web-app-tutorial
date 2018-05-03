@@ -21,6 +21,8 @@ Do you want to start developing right away?
 - Download the documentation and the completed web app: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
 - View the completed tutorial: [Final Result](https://jsfiddle.net/emxsys/e0a2z1km/)
 
+---
+
 ## Lesson 1: HTML with Bootstrap
 
 - Create a responsive web app template for mobiles, tablets and desktops.
@@ -243,7 +245,7 @@ We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) c
 to host the WorldWind layers and settings content. Bootstrap includes a few options for 
 laying out a series of cards. We'll use Masonry-like columns by wrapping them in `.card-columns`.
 
-
+---
 
 
 ## Lesson 2: WorldWind Globe 
