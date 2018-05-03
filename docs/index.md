@@ -46,7 +46,7 @@ We're going to add the CDN links for the Bootstrap and Font Awesome CSS, plus
 a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
 for BootStrap and JQuery, plus our **app.js** file. 
 
-Edit the of your web page so that it looks like the following HTML:
+Edit the web page so that it looks like the following HTML:
 
 ```html
 <!doctype html>
@@ -83,20 +83,20 @@ Feel edit the `<title>`. The `<meta>` elements above are important for Bootstrap
 must be included. You can add other `<meta>` elements like author, description, etc. 
 
 
-### NavBar: Main menu
+### NavBar: The Main Menu
 
 Our web app uses a Bootstrap [Navbar](https://getbootstrap.com/docs/4.0/components/navbar/) 
 component to render the main menu at the top of the page. The Navbar is responsive: 
-it automatically adjusts its layout based on the page width.
-
-The Navbar component is placed the beginning of the `<body>` element.
-
-We'll add menu items for the features that we will implement in this tutorial, including:
+it automatically adjusts its layout based on the page width. We'll go ahead add 
+menu items all for the features that we will implement, including:
 
 - Layer panel for managing the layers displayed on the globe
 - Makers panel for managing markers placed on the globe
 - Settings panel for configuring the WorldWind globe
 - Search box for place name searches and geocoding
+
+Copy/paste the following block of HTML at the beginning of your page's `<body/>`
+section:
 
 ```html
 <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
@@ -149,30 +149,35 @@ We'll add menu items for the features that we will implement in this tutorial, i
 ```
 
 At this point you have a basic menu system. It doesn't do much yet, but it is
-responsive. Opent the web page in your browser and experiment with different 
-page sizes.  Also open your browser's development tools and try out the page
-using the mobile emulation settings.
+responsive. Check it out by opening the web page in your browser and then resize 
+the browser and watch how the menu responds. Also open your browser's development 
+tools and try out the page using the mobile emulation settings.
 
-### Main element
+PS: You can also replace the `.navbar-dark` and `.bg-dark` with alternatives to 
+change the look 
 
-The `<main/>` element will host main content of our web app: the globe and other 
-content. In this tutorial, we want the element to be the full width of the page 
-so we apply the Bootstrap `container-fluid` class to the element. The `container` 
-element used in many Bootstrap templates constrains the width.
+### Main Content
 
-We also override Bootstrap's default padding around the element via Bootstrap's 
-[spacing utilities](https://getbootstrap.com/docs/4.0/utilities/spacing/). 
-We use `p-0` which sets the padding to zero. You can experiment with other padding 
-options.
+Now we'll add the elements that will host the globe, layers, markers and settings.
+These elements won't have much to display at this stage, but they will be wired
+up to the menu system.
+
+Copy/paste the following block of HTML at the below the `<nav/>` element:
 
 ```html
 <!-- Use container-fluid for 100% width and set padding to 0 -->
 <main role="main" class="container-fluid p-0">
-  <!-- WorldWindow -->
-  <div id="globe" class="worldwindow p-0">
+  <!-- Globe -->
+  <div id="globe" class="worldwindow">
+    <!--.d-block ensures the size is correct (prevents a scrollbar from appearing)-->
+    <canvas id="globe-canvas" class="d-block"
+            style="width: 100%; height: 100%; 
+            background-color: rgb(36,74,101);">
+        Try Chrome or FireFox.
+    </canvas>   
   </div>
 
-  <!--WorldWindow overlays-->
+  <!--Panels-->
   <div class="worldwindow-overlay noninteractive w-100">
     <div class="card-columns">
       <!--Layers-->
@@ -228,29 +233,87 @@ options.
 </main>
 ```
 
-To make layout easier, we add some padding to the top of the `body` element so that children do not slide 
-under the Navbar.
+Also copy/paste the following CSS into the custom.css file. This CSS adds some 
+padding to the top of the `body` element so that children do not display under the 
+Navbar.
 
 ```css
 body {
-    /*Account for the height of the navbar component*/
-    padding-top: 3.5rem;
+  /*Account for the height of the navbar component*/
+  padding-top: 3.5rem;
 }
+
+.worldwindow {
+  width: 100%;
+  height: calc(100vh - 3.5rem);
+  background-color: black;
+}
+
+.worldwindow-overlay {
+  position: absolute;
+  width: 100%;
+  top: 3.5rem;
+}
+
 ```
 
+Finally, copy/past the following JavaScript into your app.js file. This code
+adds an event handlers make the main menu easier to work with on small screens,
+and a handler that closes panels when their close icon is clicked.
 
-### Cards: Panels for layers and settings
+```javascript
+$(document).ready(function() {
+  "use strict";
 
-We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) components 
-to host the WorldWind layers and settings content. Bootstrap includes a few options for 
-laying out a series of cards. We'll use Masonry-like columns by wrapping them in `.card-columns`.
+  // Auto-collapse the main menu when its button items are clicked
+  $('.navbar-collapse a[role="button"]').click(function() {
+    $('.navbar-collapse').collapse('hide');
+  });
+  // Collapse card ancestors when the close icon is clicked
+  $('.collapse .close').on('click', function() {
+    $(this).closest('.collapse').collapse('hide');
+  });
+});
+```
+
+At this stage you have a functioning prototype of the web app.  Following are
+some explanations of the components used in the HTML. If you're not interested
+you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
+
+#### Full Width and Padding
+The `<main/>` element, above, hosts main content of our web app. We want the 
+element to be the full width of the page so we apply the Bootstrap `.container-fluid` 
+class (versus `.container`) to the element. We also also override Bootstrap's 
+default padding around the element by setting the padding to zero via `.p-0`, 
+part of Bootstrap's [spacing utilities](https://getbootstrap.com/docs/4.0/utilities/spacing/). 
+You can experiment with other padding options.
+
+
+#### Cards: Panels for layers and settings
+
+We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) 
+components to host the WorldWind layers and settings content. Bootstrap includes 
+a few options for laying out a series of cards. We'll use Masonry-like columns 
+by wrapping them in `.card-columns`.
+
 
 ---
 
 
 ## Lesson 2: WorldWind Globe 
+- Add WorldWind library to HTML
+- Create a Globe class to encapsulate the WorldWindow (wwd
 - Add a globe to the application
 - Add elemental layers
+
+### Add the WorldWind library
+
+Add this code to the list of JavaScript script elements at the bottom of the 
+web page:
+
+```html
+<script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
+```
 
 ## Lesson 3: Layer Management
 - Configure layers and layer categories
