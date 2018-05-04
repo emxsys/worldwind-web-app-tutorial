@@ -23,12 +23,13 @@ Do you want to start developing right away?
 
 Do you want to skip ahead to a particular subject: 
 
-- [Lesson 1: HTML with Bootstrap](#lesson-1-html-with-boostrap) 
+- [Lesson 1: HTML with Bootstrap](./lesson-1) 
 - [Lesson 2: WorldWind Globe](#lesson-2-worldwind-globe) 
 - [Lesson 3: Layer Management with Knockout](#lesson-2-layer-management-with-knockout) 
 - [Lesson 4: Place Search and Geocoding](#lesson-4-place-search-and-geocoding)
 
 ---
+
 
 ## Lesson 1: HTML with Bootstrap
 
