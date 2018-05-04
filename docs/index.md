@@ -315,10 +315,10 @@ $(document).ready(function() {
 At this stage you have a functioning prototype of the web app. The menu system is
 functional and responsive:
 
-- The _Layers_, _Markers_ and _Settings_ buttons open their respective panels
-- The _Search_ button opens the _Preview_ modal dialog
-- The branding text is a link to an external page
-- The `<canvas/>` element reserved for the globe is the full width of the page
+- The __Layers__, __Markers__ and __Settings__ buttons open their respective panels
+- The __Search__ button opens the __Preview__ modal dialog
+- The `<canvas/>` element that is reserved for the globe is the full width of the page
+- The branding text opens a link to an external page
 
 ##### Lession 1 Code
 
@@ -365,10 +365,125 @@ web page:
 
 ### Create the Globe class
 
+Now we will create a Globe class to encapsulate the `WorldWindow` object (wwd). 
+We create a globe and it's underlying `WorldWindow` like this:
+```javascript
+  let globe = new Globe("globe-canvas");
+```
 
+In our web app we will use the concept of layer _categories_ to act on subsets of 
+the `WorldWindow.layers`. We add layers to the `WorldWindow` via our `Globe.addLayer` 
+function which assigns the layer category and updates the layer properties via
+convenient _options_ object.
+ 
+Copy the following block of JavaScript to the __app.js__ file.
 
+###### JavaScript
+```javascript
+/**
+ * The Globe encapsulates the WorldWindow object (wwd) and provides application
+ * specific logic for interacting with layers.
+ * @param {String} canvasId The ID of the canvas element that will host the globe
+ * @returns {Globe}
+ */
+class Globe {
+  constructor(canvasId) {
+    // Create a WorldWindow globe on the specified HTML5 canvas
+    this.wwd = new WorldWind.WorldWindow(canvasId);
 
-Here's the complete code for this lesson: a web app prototype with a WorldWind globe.
+    // Holds the next unique id to be assigned to a layer
+    this.nextLayerId = 1;
+
+    // Add a BMNGOneImageLayer background layer. We're overriding the default 
+    // minimum altitude of the BMNGOneImageLayer so this layer always available.
+    this.addLayer(new WorldWind.BMNGOneImageLayer(), {
+      category: "background",
+      minActiveAltitude: 0
+    });
+  }
+
+  /**
+   * Adds a layer to the globe. Applies the optional options' properties to the
+   * layer, and assigns the layer a unique ID and category.
+   * @param {WorldWind.Layer} layer
+   * @param {Object|null} options E.g., {category: "base", enabled: true}
+   */
+  addLayer(layer, options) {
+    // Copy all properties defined on the options object to the layer
+    if (options) {
+      for (let prop in options) {
+        if (!options.hasOwnProperty(prop)) {
+          continue; // skip inherited props
+        }
+        layer[prop] = options[prop];
+      }
+    }
+    // Assign a default category property if not already assigned
+    if (typeof layer.category === 'undefined') {
+      layer.category = 'overlay'; // the default category
+    }
+
+    // Assign a unique layer ID to ease layer management 
+    layer.uniqueId = this.nextLayerId++;
+
+    // Add the layer to the globe
+    this.wwd.addLayer(layer);
+  }
+
+    /**
+     * Returns a new array of layers in the given category.
+     * @param {String} category E.g., "base", "overlay" or "setting".
+     * @returns {Array}
+     */
+  getLayers(category) {
+    return this.wwd.layers.filter(layer => layer.category === category);
+  }
+}
+```
+
+### Create the Globe and Add Layers
+
+Now we will create a `Globe` object and add some layers to the globe. Some of the 
+WorldWind layers require a `WorldWindow` object in their constructors (globe.wwd).
+This is one of the few cases where we access the `wwd` property outside of the 
+`Globe` class.
+
+Copy this block of JavaScript code the __app.js__ file and paste it below the
+Globe class declaration.
+
+###### JavaScript
+
+```javascript
+  // Create a globe
+  let globe = new Globe("globe-canvas");
+  // Add layers to the globe 
+  globe.addLayer(new WorldWind.BMNGLayer(), {
+    category: "base"
+  });
+  globe.addLayer(new WorldWind.CoordinatesDisplayLayer(globe.wwd), {
+    category: "setting"
+  });
+  globe.addLayer(new WorldWind.ViewControlsLayer(globe.wwd), {
+    category: "setting"
+  });
+  globe.addLayer(new WorldWind.CompassLayer(), {
+    category: "setting",
+  });
+```
+
+### Summary
+
+At this stage you have a functioning globe in the web app that responds to mouse
+and touch input.
+
+- The `Globe` class encapsulates the `WorldWindow` and contains the application 
+logic for managing layers. It creates a globe with a default _background_ layer.
+- The `Globe.addLayer` function is used to add layers to the globe and set the
+layer's category and other layer properties.
+
+##### Lession 1 Code
+
+Here's the complete code for lesson 2: A web app prototype with a globe and layers.
 
 <script async src="//jsfiddle.net/emxsys/7x6vcf78/embed/"></script>
 
