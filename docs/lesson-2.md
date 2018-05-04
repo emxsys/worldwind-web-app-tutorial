@@ -144,7 +144,7 @@ that they are added to the globe, from first to last.
 Here's the complete code for lesson 2: a web app prototype with a functioning 
 globe and layers.
 
-<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="700" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ---
 

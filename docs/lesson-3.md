@@ -290,7 +290,7 @@ layer management
 
 Here's the complete code for lesson 3: a web app with layer management.
 
-<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/sggs24bL/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="700" src="//jsfiddle.net/emxsys/sggs24bL/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ---
 
