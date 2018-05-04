@@ -30,11 +30,69 @@ a change occurs we will update a timestamp for the category. We will use a
 Knockout [observable](http://knockoutjs.com/documentation/observables.html)
 to signal a change to any subscribers (e.g., the layers view-model).
 
+In `Globe`'s constructor, add a categoryTimestamps property that maps categories 
+to observable timestamps.
 ```javascript
+// Holds a map of category and observable timestamp pairs
+this.categoryTimestamps = new Map();
+```
+
+
+Add two methods to `Globe` that operate on the `categoryTimestamps`.
+```javascript
+/**
+ * Returns an observable containing the last update timestamp for the category.
+ * @param {String} category
+ * @returns {Observable} 
+ */
+getCategoryTimestamp(category) {
+  if (!this.categoryTimestamps.has(category)) {
+    this.categoryTimestamps.set(category, ko.observable());
+  }
+  return this.categoryTimestamps.get(category);
+}
+```
+
+```javascript
+/**
+ * Updates the timestamp for the given category.
+ * @param {String} category
+ */
+updateCategoryTimestamp(category) {
+  let timestamp = this.getCategoryTimestamp(category);
+  timestamp(new Date());
+}
+```
+
+
+```javascript
+/**
+ * Toggles the enabled state of the given layer and updates the layer
+ * catetory timestamp. Applies a rule to the 'base' layers the ensures
+ * only one base layer is enabled.
+ * @param {WorldWind.Layer} layer
+ */
+toggleLayer(layer) {
+    // Apply rule: only one "base" layer can be enabled at a time
+    if (layer.category === 'base') {
+        this.wwd.layers.forEach(function (item) {
+            if (item.category === 'base' && item !== layer) {
+                item.enabled = false;
+            }
+        });
+    }
+    // Toggle the selected layer's visibility
+    layer.enabled = !layer.enabled;
+    // Trigger a redraw so the globe shows the new layer state ASAP
+    this.wwd.redraw();
+
+    // Signal a change in the category
+    this.updateCategoryTimestamp(layer.category);
+}
 
 ```
 
-### Create a View Model for Layers
+### Create a view models for Layers and Settings
 
 
 ### Show the Layers in the Panel Views
