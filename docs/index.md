@@ -352,7 +352,8 @@ with a background color
 ##### Lession 1 Code
 
 Here's the complete code for lesson 1: A web app prototype sans globe.
-<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<iframe id="lesson-1-code" width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 Following are some explanations of the components used in the HTML. If you're not
 interested you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
@@ -519,7 +520,7 @@ layer's category and other layer properties.
 Here's the complete code for lesson 2: A web app prototype with a functioning 
 globe and layers.
 
-<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe id="lesson-2-code" width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ---
 
