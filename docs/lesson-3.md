@@ -38,7 +38,9 @@ this.categoryTimestamps = new Map();
 ```
 
 
-Add two methods to `Globe` that operate on the `categoryTimestamps`.
+Add the following two methods to our `Globe` that operate on the 
+`categoryTimestamps` property.
+
 ```javascript
 /**
  * Returns an observable containing the last update timestamp for the category.
@@ -64,6 +66,10 @@ updateCategoryTimestamp(category) {
 }
 ```
 
+Also add the following `toggleLayer` method that will be used by the view models
+to toggled the `enabled` property of the layers. Note that toggling a layer
+will invoke `updateCategoryTimestamp`.  Also note how our method enforces
+a rule that only allows one 'base' layer to be enabled at a time.
 
 ```javascript
 /**
@@ -89,7 +95,14 @@ toggleLayer(layer) {
     // Signal a change in the category
     this.updateCategoryTimestamp(layer.category);
 }
+```
 
+And finally, we need to update the category timestamps when we add a layer. 
+Copy/paste this code to the end of our `Globe.addLayers` method
+
+```javascript
+// Signal that this layer category has changed
+this.getCategoryTimestamp(layer.category);
 ```
 
 ### Create a view models for Layers and Settings
