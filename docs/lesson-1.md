@@ -325,7 +325,7 @@ functional and responsive:
 with a background color 
 - The branding text opens a link to an external page
 
-Here's the complete code for lesson 1: A web app prototype sans globe.
+Here's the complete code for lesson 1: a web app prototype sans globe.
 
 <iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 

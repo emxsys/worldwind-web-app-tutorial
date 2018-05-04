@@ -8,14 +8,13 @@
 
 In a hurry? Here's the completed code: [Lesson 2](https://jsfiddle.net/emxsys/7x6vcf78/)
 
-### Add the WorldWind library
+### Include the WorldWind library
 
-Add this code to the list of JavaScript scripts at the bottom of the web page:
-
+We will use the WorldWind library hosted on the NASA servers. Add this line of 
+code to the list of JavaScript scripts at the bottom of your web page:
 ```html
 <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
 ```
----
 
 ### Create the Globe class
 
@@ -29,7 +28,6 @@ function to assign a category and to update the layer's properties via a
 convenient _options_ object.
  
 Copy the following block of JavaScript to the __app.js__ file.
-
 ###### JavaScript
 ```javascript
 /**
@@ -93,14 +91,14 @@ class Globe {
 }
 ```
 
-You create a globe object and it's underlying `WorldWindow` like this: 
+Now you create a `Globe` object with it's underlying `WorldWindow` like this: 
 ```javascript
   let globe = new Globe("globe-canvas");
 ```
 where "globe-canvas" is the name of a `<canvas/>` element in your HTML.
 
 
-### Create the Globe and Add Layers
+### Create the globe and add layers
 
 Now we will create a `Globe` object and add some layers to the globe. Some of the 
 WorldWind layers require a `WorldWindow` object in their constructors (globe.wwd).
@@ -108,13 +106,14 @@ This is one of the few cases where we access the `wwd` property outside of the
 `Globe` class.
 
 Copy this block of JavaScript code the __app.js__ file and paste it below the
-Globe class declaration.
+`Globe` class declaration.
 
 ###### JavaScript
 
 ```javascript
   // Create a globe
   let globe = new Globe("globe-canvas");
+
   // Add layers to the globe 
   globe.addLayer(new WorldWind.BMNGLayer(), {
     category: "base"
@@ -137,11 +136,12 @@ At this stage you have a functioning globe in the web app that responds to mouse
 and touch input.
 
 - The `Globe` class encapsulates the `WorldWindow` and contains the application 
-logic for managing layers. It creates a globe with a default _background_ layer.
+logic for managing layers. It creates a globe with a _background_ layer.
 - The `Globe.addLayer` function is used to add layers to the globe and set the
-layer's category and other layer properties.
+layer's category and other layer properties. Layer are rendered in the order
+that they are added to the globe, from first to last.
 
-Here's the complete code for lesson 2: A web app prototype with a functioning 
+Here's the complete code for lesson 2: a web app prototype with a functioning 
 globe and layers.
 
 <iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
