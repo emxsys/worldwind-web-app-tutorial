@@ -25,8 +25,8 @@ you should check out this template: [Bootstrap Starter Template](https://getboot
 
 We're going to create the basic web page structure. We'll include the CDN 
 (content delivery network) links for the Bootstrap and Font Awesome CSS, plus
-a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
-for BootStrap and JQuery, a link to our **app.js** file. 
+a link to our custom.css file. Also, we're adding the JavaScript CDN links 
+for BootStrap and JQuery, a link to our app.js file. 
 
 Copy/paste the following HTML into your web page.
 
@@ -75,9 +75,10 @@ it automatically adjusts its layout based on the page width. We'll go ahead add
 menu items all for the features that we will implement, including:
 
 - Layer panel for managing the layers displayed on the globe
-- Makers panel for managing markers placed on the globe
+- Markers panel for managing markers placed on the globe
 - Settings panel for configuring the WorldWind globe
 - Search box for place name searches and geocoding
+- Branding text and link
 
 Copy the following block of HTML and paste it at the beginning of your page's `<body/>`
 section:
@@ -134,7 +135,7 @@ section:
 ```
 
 At this point you have a basic menu system. It doesn't do much yet, but it is
-responsive. Check it out by opening the web page in your browser and then resize 
+responsive. Check it out by opening your web page in a browser and then resize 
 the browser and watch how the menu responds. Also open your browser's development 
 tools and try out the page using the mobile emulation settings.
 
@@ -148,7 +149,7 @@ control the Navbar's text color and the `.bg-*` classes control the Navbar's
 ### Main Content
 
 Now we'll add the elements that will host the globe, the layers, markers and 
-settings panels, and and the search preview modal. These elements won't have 
+settings panels, and the search preview modal. These elements won't have 
 much to display at this stage, but they will be wired up to the menu system.
 
 Copy the following block of HTML and paste it the below the closing `<nav/>` 
@@ -245,7 +246,7 @@ element.
 
 Also copy/paste the following CSS into the custom.css file. This CSS adds some 
 padding to the top of the `body` element so that children do not display under the 
-Navbar. It also defines some custom CSS classes.
+Navbar. It also defines some custom CSS classes. 
 
 ###### CSS
 ```css
@@ -266,6 +267,7 @@ body {
   top: 3.5rem;
 }
 
+/* Prevents an element, like a <div/> from consuming user input */
 .noninteractive {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -276,6 +278,8 @@ body {
   pointer-events: none;
 }
 
+/* Allows an element, to receive user input */
+/* Useful if a parent element is using .noniteractive */
 .interactive {
   -webkit-touch-callout: auto !important;
   -webkit-user-select: auto !important;
@@ -288,7 +292,7 @@ body {
 
 ```
 
-Finally, copy/past the following JavaScript into your app.js file. This code
+Finally, copy/paste the following JavaScript into your app.js file. This code
 adds an event handler make the main menu easier to work with on small screens,
 and it adds a handler that closes panels when their close icon is clicked.
 
@@ -301,6 +305,7 @@ $(document).ready(function() {
   $('.navbar-collapse a[role="button"]').click(function() {
     $('.navbar-collapse').collapse('hide');
   });
+
   // Collapse card ancestors when the close icon is clicked
   $('.collapse .close').on('click', function() {
     $(this).closest('.collapse').collapse('hide');
