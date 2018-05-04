@@ -13,7 +13,7 @@ customizable web app ready to be deployed to your site. This tutorial demonstrat
 - Multi-globe support
 
 This is what we will build:
-<iframe width="100%" height="700" src="//jsfiddle.net/emxsys/e0a2z1km/embedded/result/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<script async src="//jsfiddle.net/emxsys/e0a2z1km/embed/result/"></script>
 
 
 ## Quick Start
