@@ -96,9 +96,10 @@ menu items all for the features that we will implement, including:
 - Settings panel for configuring the WorldWind globe
 - Search box for place name searches and geocoding
 
-Copy/paste the following block of HTML at the beginning of your page's `<body/>`
+Copy the following block of HTML and paste it at the beginning of your page's `<body/>`
 section:
 
+###### HTML
 ```html
 <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
 
@@ -139,12 +140,12 @@ section:
       </li>
     </ul>
     <!--Search Box-->
-    <form class="form-inline">
+    <div class="form-inline">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success">
+      <button class="btn btn-outline-success" data-toggle="modal" data-target="#preview">
             <span class="fas fa-search" aria-hidden="true"></span>
-      </button>
-    </form>
+        </button>
+    </div>
   </div>
 </nav>
 ```
@@ -154,17 +155,22 @@ responsive. Check it out by opening the web page in your browser and then resize
 the browser and watch how the menu responds. Also open your browser's development 
 tools and try out the page using the mobile emulation settings.
 
-PS: You can also replace the `.navbar-dark` and `.bg-dark` with alternatives to 
-change the style. 
+Feel free to change the branding text and link from _WorldWind_ to something
+else. Also, you can also replace the `.navbar-dark` and `.bg-dark` with 
+alternatives to change the style. The `.navbar-dark` and `.navbar-light` classes
+control the Navbar's text color and the `.bg-*` classes control the Navbar's 
+[background colors](https://getbootstrap.com/docs/4.0/utilities/colors/#background-color).
 
 ### Main Content
 
-Now we'll add the elements that will host the globe, layers, markers and settings.
-These elements won't have much to display at this stage, but they will be wired
-up to the menu system.
+Now we'll add the elements that will host the globe, the layers, markers and 
+settings panels, and and the search preview modal. These elements won't have 
+much to display at this stage, but they will be wired up to the menu system.
 
-Copy/paste the following block of HTML the below the closing `<nav/>` element:
+Copy the following block of HTML and paste it the below the closing `<nav/>` 
+element. 
 
+##### HTML
 ```html
 <!-- Use container-fluid for 100% width and set padding to 0 -->
 <main role="main" class="container-fluid p-0">
@@ -229,7 +235,26 @@ Copy/paste the following block of HTML the below the closing `<nav/>` element:
     </div>
 
     <!--Search Preview Dialog-->
-    <div id="preview" class="hidden">
+    <div id="preview" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search Results</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Search result go here
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Go to</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
 </main>
 ```
@@ -238,6 +263,7 @@ Also copy/paste the following CSS into the custom.css file. This CSS adds some
 padding to the top of the `body` element so that children do not display under the 
 Navbar. It also defines some custom CSS classes.
 
+##### CSS
 ```css
 body {
   /*Account for the height of the navbar component*/
@@ -262,6 +288,7 @@ Finally, copy/past the following JavaScript into your app.js file. This code
 adds an event handler make the main menu easier to work with on small screens,
 and it adds a handler that closes panels when their close icon is clicked.
 
+##### JavaScript
 ```javascript
 $(document).ready(function() {
   "use strict";
@@ -281,15 +308,21 @@ $(document).ready(function() {
 });
 ```
 
-At this stage you have a functioning prototype of the web app.  
 
+#### Summary
+At this stage you have a functioning prototype of the web app. The menu system is
+functional and responsive, the _Layers_, _Markers_ and _Settings_ buttons open 
+their respective panels, and the _Search_ button opens the Preview modal dialog.
+Ths _WorldWind_ branding text is a link to an external page.
+
+##### Lession 1 Code
 Here's the complete code for this lesson: a web app prototype sans globe.
 <script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
 
 Following are some explanations of the components used in the HTML. If you're not
 interested you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
 
-#### Full Width and Padding
+##### Full Width and Padding
 The `<main/>` element, above, hosts main content of our web app. We want the 
 element to be the full width of the page so we apply the Bootstrap `.container-fluid` 
 class (versus `.container`) to the element. We also also override Bootstrap's 
@@ -298,7 +331,7 @@ part of Bootstrap's [spacing utilities](https://getbootstrap.com/docs/4.0/utilit
 You can experiment with other padding options.
 
 
-#### Cards: Panels for layers and settings
+##### Cards: Panels for layers and settings
 
 We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) 
 components to host the WorldWind layers and settings content. Bootstrap includes 
