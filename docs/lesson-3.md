@@ -182,8 +182,9 @@ function SettingsViewModel(globe) {
 
 ### Show the Layers in the Panel Views
 
-Now we will create a render buttons for all the layers in an observable array via
+Now we will create buttons for all the layers in an observable array via a
 Knockout [view template](http://knockoutjs.com/documentation/template-binding.html).
+The template 
 
 Add the following script to the web page. Place it close to the elements that will
 use it, like between the `.worldwind-overlay` `<div/>` and the search `#preview` `<div/>`.
@@ -214,6 +215,66 @@ In the Settings panel, replace the `.card-body` `<div/>` contents with this HTML
 
 ### Bind the Views to the View Models
 
+Add the following JavaScript code to app.js below the globe and layer 
+initialization code:
+```javascript
+  // Activate the Knockout bindings between our view models and the html
+  let layersViewModel = new LayersViewModel(globe);
+  let settingsViewModel = new SettingsViewModel(globe);
+  ko.applyBindings(layersViewModel, document.getElementById('layers'));
+  ko.applyBindings(settingsViewModel, document.getElementById('settings'));
+```
+
+### Make it interesting: Add more layers
+
+
+In app.js replace the  globe and layer initialization code with this block:
+
+```javascript
+  // Create a globe
+  let globe = new Globe("globe-canvas");
+  // Add layers to the globe 
+  // Add layers ordered by drawing order: first to last
+  globe.addLayer(new WorldWind.BMNGLayer(), {
+    category: "base"
+  });
+  globe.addLayer(new WorldWind.BMNGLandsatLayer(), {
+    category: "base",
+    enabled: false
+  });
+  globe.addLayer(new WorldWind.BingAerialLayer(), {
+    category: "base",
+    enabled: false
+  });
+  globe.addLayer(new WorldWind.BingAerialWithLabelsLayer(), {
+    category: "base",
+    enabled: false,
+    detailControl: 1.5
+  });
+  globe.addLayer(new WorldWind.BingRoadsLayer(), {
+    category: "overlay",
+    enabled: false,
+    detailControl: 1.5,
+    opacity: 0.75
+  });
+  globe.addLayer(new WorldWind.CoordinatesDisplayLayer(globe.wwd), {
+    category: "setting"
+  });
+  globe.addLayer(new WorldWind.ViewControlsLayer(globe.wwd), {
+    category: "setting"
+  });
+  globe.addLayer(new WorldWind.CompassLayer(), {
+    category: "setting",
+    enabled: false
+  });
+  globe.addLayer(new WorldWind.StarFieldLayer(), {
+    category: "setting",
+    enabled: false
+  });
+  globe.addLayer(new WorldWind.AtmosphereLayer(), {
+    category: "setting",
+    enabled: false
+  });```
 
 ## Summary
 
