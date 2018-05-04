@@ -25,7 +25,7 @@ Do you want to skip ahead to a particular subject:
 
 - [Lesson 1: HTML with Bootstrap](#lesson-1-html-with-boostrap) 
 - [Lesson 2: WorldWind Globe](#lesson-2-worldwind-globe) 
-- [Lesson 3: Layer Management with Knockout](#lesson-2-layer-management) 
+- [Lesson 3: Layer Management with Knockout](#lesson-2-layer-management-with-knockout) 
 - [Lesson 4: Place Search and Geocoding](#lesson-4-place-search-and-geocoding)
 
 ---
@@ -295,6 +295,26 @@ body {
   top: 3.5rem;
 }
 
+.noninteractive {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  pointer-events: none;
+}
+
+.interactive {
+  -webkit-touch-callout: auto !important;
+  -webkit-user-select: auto !important;
+  -khtml-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  -o-user-select: auto !important;
+  pointer-events: auto !important;
+}
+
 ```
 
 Finally, copy/past the following JavaScript into your app.js file. This code
@@ -305,10 +325,6 @@ and it adds a handler that closes panels when their close icon is clicked.
 ```javascript
 $(document).ready(function() {
   "use strict";
-
-  // Create a globe
-  let wwd = new WorldWind.WorldWind("globe-canvas");
-  wwd.addLayer(new WorldWind.BMNGOneImageLayer());
 
   // Auto-collapse the main menu when its button items are clicked
   $('.navbar-collapse a[role="button"]').click(function() {
@@ -327,8 +343,8 @@ $(document).ready(function() {
 At this stage you have a functioning prototype of the web app. The menu system is
 functional and responsive:
 
-- The __Layers__, __Markers__ and __Settings__ buttons open their respective panels
-- The __Search__ button opens the __Preview__ modal dialog
+- The Layers, Markers and Settings buttons open their respective panels
+- The Search button opens the Preview modal dialog
 - The `<canvas/>` element for the globe that is the full width of the page with
 with a background color 
 - The branding text opens a link to an external page
@@ -336,7 +352,7 @@ with a background color
 ##### Lession 1 Code
 
 Here's the complete code for lesson 1: A web app prototype sans globe.
-<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 Following are some explanations of the components used in the HTML. If you're not
 interested you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
@@ -386,9 +402,9 @@ object (wwd). You create a globe and it's underlying `WorldWindow` like this:
   let globe = new Globe("globe-canvas");
 ```
 
-In our web app we will use the concept of layer _categories_ to act on subsets of 
-the `WorldWindow.layers`. We add layers to the `WorldWindow` via our `Globe.addLayer` 
-function which assigns the layer category and updates the layer properties via
+In our web app we will be using layer _categories_ to act on subsets of the
+`WorldWindow.layers`. We add layers to the `WorldWindow` via the `Globe.addLayer` 
+function to assign a category and to update the layer's properties via a 
 convenient _options_ object.
  
 Copy the following block of JavaScript to the __app.js__ file.
@@ -511,5 +527,7 @@ globe and layers.
 - Configure layers and layer categories
 - Enable and disable layers
 - Configure WMS/WMTS layers
+
+
 
 ## Lesson 4: Place Search and Geocoding
