@@ -502,7 +502,7 @@ layer's category and other layer properties.
 Here's the complete code for lesson 2: A web app prototype with a functioning 
 globe and layers.
 
-<script async src="//jsfiddle.net/emxsys/7x6vcf78/embed/"></script>
+<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ---
 
