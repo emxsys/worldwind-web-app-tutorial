@@ -6,6 +6,8 @@
 - Menus and panels for displaying content.
 - Customizable, themes, CSS
 
+In a hurry? Here's the completed code: [Lesson 1](https://jsfiddle.net/emxsys/wun3zg0c/)
+
 ### Prerequisites
 
 Our web app will consist of three files. Create the following files in your 
@@ -306,7 +308,7 @@ $(document).ready(function() {
 });
 ```
 
-### Summary
+## Summary
 
 
 At this stage you have a functioning prototype of the web app. The menu system is
