@@ -278,7 +278,7 @@ body {
   pointer-events: none;
 }
 
-/* Allows an element, to receive user input */
+/* Allows an element to receive user input */
 /* Useful if a parent element is using .noniteractive */
 .interactive {
   -webkit-touch-callout: auto !important;
@@ -324,8 +324,6 @@ functional and responsive:
 - The `<canvas/>` element for the globe that is the full width of the page with
 with a background color 
 - The branding text opens a link to an external page
-
-#### Lesson 1 Code
 
 Here's the complete code for lesson 1: A web app prototype sans globe.
 

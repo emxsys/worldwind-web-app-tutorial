@@ -1,7 +1,7 @@
 # How to Build a WorldWind Web App
 
 ## Lesson 2: WorldWind Globe 
-- Add WorldWind library to HTML
+- Add the WorldWind library
 - Create a Globe class to encapsulate the WorldWindow object
 - Add a globe to the application
 - Add layers to the globe
@@ -10,8 +10,7 @@ In a hurry? Here's the completed code: [Lesson 2](https://jsfiddle.net/emxsys/7x
 
 ### Add the WorldWind library
 
-Add this code to the list of JavaScript script elements at the bottom of the 
-web page:
+Add this code to the list of JavaScript scripts at the bottom of the web page:
 
 ```html
 <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
@@ -22,10 +21,7 @@ web page:
 
 Now we will create a Globe class to encapsulate the 
 [WorldWindow](https://nasaworldwind.github.io/WebWorldWind/WorldWindow.html) 
-object (wwd). You create a globe and it's underlying `WorldWindow` like this:
-```javascript
-  let globe = new Globe("globe-canvas");
-```
+object (wwd). 
 
 In our web app we will be using layer _categories_ to act on subsets of the
 `WorldWindow.layers`. We add layers to the `WorldWindow` via the `Globe.addLayer` 
@@ -96,7 +92,13 @@ class Globe {
   }
 }
 ```
----
+
+You create a globe object and it's underlying `WorldWindow` like this: 
+```javascript
+  let globe = new Globe("globe-canvas");
+```
+where "globe-canvas" is the name of a `<canvas/>` element in your HTML.
+
 
 ### Create the Globe and Add Layers
 
@@ -139,14 +141,13 @@ logic for managing layers. It creates a globe with a default _background_ layer.
 - The `Globe.addLayer` function is used to add layers to the globe and set the
 layer's category and other layer properties.
 
-##### Lesson 2 Code
-
 Here's the complete code for lesson 2: A web app prototype with a functioning 
 globe and layers.
 
 <iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ---
+
 ### Next Steps
 - [Home](index.md) 
 - [Prev: Lesson 1 - HTML with Bootstrap](lesson-1.md) 
