@@ -20,7 +20,11 @@ Do you want to start developing right away?
 
 - Download the documentation and the completed web app: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
 - View the completed tutorial: [Final Result](https://jsfiddle.net/emxsys/e0a2z1km/)
-
+ 
+[Lesson 1: HTML with Bootstrap](#lesson-1-html-with-boostrap)
+[Lesson 2: WorldWind Globe](#lesson-2-worldwind-globe)
+[Lesson 3: Layer Management with Knockout](#lesson-2-layer-management)
+[Lesson 4: Place Search and Geocoding](#lesson-4-place-search-and-geocoding)
 ---
 
 ## Lesson 1: HTML with Bootstrap
@@ -39,6 +43,8 @@ Create the files for a basic web app in your favorite IDE or editor.
 
 If you want to start with a Bootstrap example, you can download this template: 
 [Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
+
+---
 
 ### Dependencies 
 
@@ -84,6 +90,7 @@ The `<meta>` elements above are important for Bootstrap and must be included.
 You can add other `<meta>` elements like author, description, etc. Feel fee to 
 edit the `<title>`.
 
+---
 
 ### NavBar: The Main Menu
 
@@ -161,6 +168,8 @@ else. Also, you can also replace the `.navbar-dark` and `.bg-dark` with
 alternatives to change the style. The `.navbar-dark` and `.navbar-light` classes
 control the Navbar's text color and the `.bg-*` classes control the Navbar's 
 [background colors](https://getbootstrap.com/docs/4.0/utilities/colors/#background-color).
+
+---
 
 ### Main Content
 
@@ -308,7 +317,7 @@ $(document).ready(function() {
   });
 });
 ```
-
+---
 
 #### Summary
 
@@ -494,9 +503,9 @@ globe and layers.
 
 ---
 
-## Lesson 3: Layer Management
+## Lesson 3: Layer Management with Knockout
 - Configure layers and layer categories
 - Enable and disable layers
 - Configure WMS/WMTS layers
 
-## Lesson 4: Geocoding
+## Lesson 4: Place Search and Geocoding
