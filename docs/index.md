@@ -46,8 +46,9 @@ We're going to add the CDN links for the Bootstrap and Font Awesome CSS, plus
 a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
 for BootStrap and JQuery, plus our **app.js** file. 
 
-Copy/paste the following HTML into your web page:
+Copy/paste the following HTML into your web page.
 
+###### HTML
 ```html
 <!doctype html>
 <html lang="en">
@@ -170,7 +171,7 @@ much to display at this stage, but they will be wired up to the menu system.
 Copy the following block of HTML and paste it the below the closing `<nav/>` 
 element. 
 
-##### HTML
+###### HTML
 ```html
 <!-- Use container-fluid for 100% width and set padding to 0 -->
 <main role="main" class="container-fluid p-0">
@@ -263,7 +264,7 @@ Also copy/paste the following CSS into the custom.css file. This CSS adds some
 padding to the top of the `body` element so that children do not display under the 
 Navbar. It also defines some custom CSS classes.
 
-##### CSS
+###### CSS
 ```css
 body {
   /*Account for the height of the navbar component*/
@@ -288,7 +289,7 @@ Finally, copy/past the following JavaScript into your app.js file. This code
 adds an event handler make the main menu easier to work with on small screens,
 and it adds a handler that closes panels when their close icon is clicked.
 
-##### JavaScript
+###### JavaScript
 ```javascript
 $(document).ready(function() {
   "use strict";
@@ -310,13 +311,18 @@ $(document).ready(function() {
 
 
 #### Summary
+
 At this stage you have a functioning prototype of the web app. The menu system is
-functional and responsive, the _Layers_, _Markers_ and _Settings_ buttons open 
-their respective panels, and the _Search_ button opens the Preview modal dialog.
-Ths _WorldWind_ branding text is a link to an external page.
+functional and responsive:
+
+- The _Layers_, _Markers_ and _Settings_ buttons open their respective panels
+- The _Search_ button opens the _Preview_ modal dialog
+- The branding text is a link to an external page
+- The `<canvas/>` element reserved for the globe is the full width of the page
 
 ##### Lession 1 Code
-Here's the complete code for this lesson: a web app prototype sans globe.
+
+Here's the complete code for lesson 1: A web app prototype sans globe.
 <script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
 
 Following are some explanations of the components used in the HTML. If you're not
@@ -344,9 +350,9 @@ by wrapping them in `.card-columns`.
 
 ## Lesson 2: WorldWind Globe 
 - Add WorldWind library to HTML
-- Create a Globe class to encapsulate the WorldWindow (wwd
+- Create a Globe class to encapsulate the WorldWindow object
 - Add a globe to the application
-- Add elemental layers
+- Add layers to the globe
 
 ### Add the WorldWind library
 
@@ -358,6 +364,8 @@ web page:
 ```
 
 ### Create the Globe class
+
+
 
 
 Here's the complete code for this lesson: a web app prototype with a WorldWind globe.
