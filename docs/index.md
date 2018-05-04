@@ -481,7 +481,7 @@ logic for managing layers. It creates a globe with a default _background_ layer.
 - The `Globe.addLayer` function is used to add layers to the globe and set the
 layer's category and other layer properties.
 
-##### Lession 1 Code
+##### Lession 2 Code
 
 Here's the complete code for lesson 2: A web app prototype with a globe and layers.
 
