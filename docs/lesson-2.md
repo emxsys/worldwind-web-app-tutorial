@@ -6,6 +6,8 @@
 - Add a globe to the application
 - Add layers to the globe
 
+In a hurry? Here's the completed code: [Lesson 2](https://jsfiddle.net/emxsys/7x6vcf78/)
+
 ### Add the WorldWind library
 
 Add this code to the list of JavaScript script elements at the bottom of the 
@@ -127,7 +129,7 @@ Globe class declaration.
 ```
 ---
 
-### Summary
+## Summary
 
 At this stage you have a functioning globe in the web app that responds to mouse
 and touch input.
@@ -142,8 +144,9 @@ layer's category and other layer properties.
 Here's the complete code for lesson 2: A web app prototype with a functioning 
 globe and layers.
 
+<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
----
 
-
-[Home](index.md) |  [Prev: Lesson 1 - HTML with Bootstrap](lesson-1.md) | [Next: Lesson 3 - Layer Management with Knockout](lesson-3.md)
+- [Home](index.md) 
+- [Prev: Lesson 1 - HTML with Bootstrap](lesson-1.md) 
+- [Next: Lesson 3 - Layer Management with Knockout](lesson-3.md)

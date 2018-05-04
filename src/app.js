@@ -86,6 +86,11 @@ $(document).ready(function () {
             }
         }
 
+        /**
+         * Returns a new array of layers in the given category.
+         * @param {String} category E.g., "base", "overlay" or "setting".
+         * @returns {Array}
+         */
         getLayers(category) {
             return this.wwd.layers.filter(layer => layer.category === category);
         }
