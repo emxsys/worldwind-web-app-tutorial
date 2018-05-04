@@ -1,10 +1,12 @@
-# Lesson 1: HTML with Bootstrap
+# How to Build a WorldWind Web App
+
+## Lesson 1: HTML with Bootstrap
 
 - Create a responsive web app template for mobiles, tablets and desktops.
 - Menus and panels for displaying content.
 - Customizable, themes, CSS
 
-## Prerequisites
+### Prerequisites
 
 Our web app will consist of three files. Create the following files in your 
 favorite IDE or editor.
@@ -17,7 +19,7 @@ If you want to start with one of the [Bootstrap Examples](http://getbootstrap.co
 you should check out this template: [Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
 
 
-## Dependencies 
+### Dependencies 
 
 We're going to create the basic web page structure. We'll include the CDN 
 (content delivery network) links for the Bootstrap and Font Awesome CSS, plus
@@ -63,7 +65,7 @@ You can add other `<meta>` elements like author, description, etc. Feel free to
 edit the `<title>`.
 
 
-## NavBar: The Main Menu
+### NavBar: The Main Menu
 
 Our web app uses a Bootstrap [Navbar](https://getbootstrap.com/docs/4.0/components/navbar/) 
 component to create the main menu at the top of the page. The Navbar is responsive: 
@@ -141,7 +143,7 @@ control the Navbar's text color and the `.bg-*` classes control the Navbar's
 [background colors](https://getbootstrap.com/docs/4.0/utilities/colors/#background-color).
 
 
-## Main Content
+### Main Content
 
 Now we'll add the elements that will host the globe, the layers, markers and 
 settings panels, and and the search preview modal. These elements won't have 
@@ -304,8 +306,8 @@ $(document).ready(function() {
 });
 ```
 
+### Summary
 
-## Summary
 
 At this stage you have a functioning prototype of the web app. The menu system is
 functional and responsive:
@@ -345,4 +347,4 @@ by wrapping them in `.card-columns`.
 
 ---
 
-[Home](index.md) | [Lesson 2: WorldWind Globe](lesson-2.md)
+[Home](index.md) | [Next: Lesson 2 - WorldWind Globe](lesson-2.md)

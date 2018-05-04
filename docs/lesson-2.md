@@ -1,4 +1,5 @@
 # How to Build a WorldWind Web App
+
 ## Lesson 2: WorldWind Globe 
 - Add WorldWind library to HTML
 - Create a Globe class to encapsulate the WorldWindow object
@@ -136,7 +137,7 @@ logic for managing layers. It creates a globe with a default _background_ layer.
 - The `Globe.addLayer` function is used to add layers to the globe and set the
 layer's category and other layer properties.
 
-##### Lession 2 Code
+##### Lesson 2 Code
 
 Here's the complete code for lesson 2: A web app prototype with a functioning 
 globe and layers.
@@ -145,3 +146,4 @@ globe and layers.
 ---
 
 
+[Home](index.md) |  [Prev: Lesson 1 - HTML with Bootstrap](lesson-1.md) | [Next: Lesson 3 - Layer Management with Knockout](lesson-3.md)
