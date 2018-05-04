@@ -362,6 +362,7 @@ web page:
 ```html
 <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
 ```
+---
 
 ### Create the Globe class
 
@@ -441,6 +442,7 @@ class Globe {
   }
 }
 ```
+---
 
 ### Create the Globe and Add Layers
 
@@ -471,6 +473,7 @@ Globe class declaration.
     category: "setting",
   });
 ```
+---
 
 ### Summary
 
@@ -484,9 +487,12 @@ layer's category and other layer properties.
 
 ##### Lession 2 Code
 
-Here's the complete code for lesson 2: A web app prototype with a globe and layers.
+Here's the complete code for lesson 2: A web app prototype with a functioning 
+globe and layers.
 
 <script async src="//jsfiddle.net/emxsys/7x6vcf78/embed/"></script>
+
+---
 
 ## Lesson 3: Layer Management
 - Configure layers and layer categories
