@@ -20,11 +20,14 @@ Do you want to start developing right away?
 
 - Download the documentation and the completed web app: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
 - View the completed tutorial: [Final Result](https://jsfiddle.net/emxsys/e0a2z1km/)
- 
-[Lesson 1: HTML with Bootstrap](#lesson-1-html-with-boostrap)
-[Lesson 2: WorldWind Globe](#lesson-2-worldwind-globe)
-[Lesson 3: Layer Management with Knockout](#lesson-2-layer-management)
-[Lesson 4: Place Search and Geocoding](#lesson-4-place-search-and-geocoding)
+
+Skip ahead: 
+
+- [Lesson 1: HTML with Bootstrap](#lesson-1-html-with-boostrap)
+- [Lesson 2: WorldWind Globe](#lesson-2-worldwind-globe)
+- [Lesson 3: Layer Management with Knockout](#lesson-2-layer-management)
+- [Lesson 4: Place Search and Geocoding](#lesson-4-place-search-and-geocoding)
+
 ---
 
 ## Lesson 1: HTML with Bootstrap
