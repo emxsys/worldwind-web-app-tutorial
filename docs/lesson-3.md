@@ -107,7 +107,7 @@ Copy/paste this code to the end of our `Globe.addLayers` method:
 this.getCategoryTimestamp(layer.category);
 ```
 
-### Create a view models for Layers and Settings
+### Create View Models for Layers and Settings
 
 Now we will create a view model for the layers. Our view model will have two
 [observable arrays](http://knockoutjs.com/documentation/observableArrays.html) 
