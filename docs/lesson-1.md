@@ -4,19 +4,18 @@
 - Menus and panels for displaying content.
 - Customizable, themes, CSS
 
-### Prerequisites
+## Prerequisites
 
-Our web app will consist of three files. Create the follwoing files in your 
+Our web app will consist of three files. Create the following files in your 
 favorite IDE or editor.
 
 - index.html (the web page)
-- custom.css (overrides)
-- app.js (JavaScript)
+- custom.css (for custom CSS and overrides)
+- app.js (JavaScript code)
 
 If you want to start with one of the [Bootstrap Examples](http://getbootstrap.com/docs/4.0/examples/), 
-you can check out this template: [Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
+you should check out this template: [Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
 
----
 
 ## Dependencies 
 
@@ -63,7 +62,6 @@ The `<meta>` elements above are important for Bootstrap and must be included.
 You can add other `<meta>` elements like author, description, etc. Feel free to 
 edit the `<title>`.
 
----
 
 ## NavBar: The Main Menu
 
@@ -142,7 +140,6 @@ alternatives to change the style. The `.navbar-dark` and `.navbar-light` classes
 control the Navbar's text color and the `.bg-*` classes control the Navbar's 
 [background colors](https://getbootstrap.com/docs/4.0/utilities/colors/#background-color).
 
----
 
 ## Main Content
 
@@ -306,9 +303,9 @@ $(document).ready(function() {
   });
 });
 ```
----
 
-### Summary
+
+## Summary
 
 At this stage you have a functioning prototype of the web app. The menu system is
 functional and responsive:
@@ -319,13 +316,14 @@ functional and responsive:
 with a background color 
 - The branding text opens a link to an external page
 
-#### Lession 1 Code
+#### Lesson 1 Code
 
 Here's the complete code for lesson 1: A web app prototype sans globe.
 
 <iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ### Notes
+
 Following are some explanations of the components used in the HTML. If you're not
 interested you can skip ahead to [Lesson 2](lesson-2.md).
 
@@ -345,5 +343,6 @@ components to host the WorldWind layers and settings content. Bootstrap includes
 a few options for laying out a series of cards. We'll use Masonry-like columns 
 by wrapping them in `.card-columns`.
 
+---
 
-<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+[Home](index.md) | [Lesson 2: WorldWind Globe](lesson-2.md)
