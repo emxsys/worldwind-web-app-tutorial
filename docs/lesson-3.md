@@ -107,8 +107,112 @@ this.getCategoryTimestamp(layer.category);
 
 ### Create a view models for Layers and Settings
 
+Now we will create a view model for the layers. Our view model will have two
+[observable arrays](http://knockoutjs.com/documentation/observableArrays.html) 
+whose contents are displayed in the Layers panel: one for the base layers and the
+other for overlays. Our view model will _subscribe_ to the globe's 
+`categoryTimestamp` observables. When a change occurs in a layer category, the
+view model with update the corresponding observable array, which will automatically
+update the view.
+
+Add the following JavaScript code to app.js below the `Globe` class.
+
+```javascript
+/**
+ * View model for the layers panel.
+ * @param {Globe} globe - Our globe object
+ */
+function LayersViewModel(globe) {
+  var self = this;
+  self.baseLayers = ko.observableArray(globe.getLayers('base').reverse());
+  self.overlayLayers = ko.observableArray(globe.getLayers('overlay').reverse());
+
+  // Update the view model whenever the model changes
+  globe.getCategoryTimestamp('base').subscribe(newValue =>
+    self.loadLayers(globe.getLayers('base'), self.baseLayers));
+
+  globe.getCategoryTimestamp('overlay').subscribe(newValue =>
+    self.loadLayers(globe.getLayers('overlay'), self.overlayLayers));
+
+  // Utility to load the layers in reverse order to show last rendered on top
+  self.loadLayers = function(layers, observableArray) {
+    observableArray.removeAll();
+    layers.reverse().forEach(layer => observableArray.push(layer));
+  };
+
+  // Click event handler for the layer panel's buttons
+  self.toggleLayer = function(layer) {
+    globe.toggleLayer(layer);
+  };
+}
+```
+
+We will also create a view model for the settings. Layers within the _setting_
+category will be displayed and managed by the Settings panel. The same principles
+described for the layers view model apply here as well.
+
+Add the following JavaScript code to app.js below the `LayersViewModel`.
+
+```javascript
+/**
+ * View model for the settings.
+ * @param {Globe} globe - Our globe object (not a WorldWind.Globe)
+ */
+function SettingsViewModel(globe) {
+  var self = this;
+  self.settingLayers = ko.observableArray(globe.getLayers('setting').reverse());
+
+  // Update the view model whenever the model changes
+  globe.getCategoryTimestamp('setting').subscribe(newValue =>
+    self.loadLayers(globe.getLayers('setting'), self.settingLayers));
+
+  // Utility to load layers in reverse order 
+  self.loadLayers = function(layers, observableArray) {
+    observableArray.removeAll();
+    layers.reverse().forEach(layer => observableArray.push(layer));
+  };
+
+  // Click event handler for the setting panel's buttons
+  self.toggleLayer = function(layer) {
+    globe.toggleLayer(layer);
+  };
+}
+```
+
 
 ### Show the Layers in the Panel Views
+
+Now we will create a render buttons for all the layers in an observable array via
+Knockout [view template](http://knockoutjs.com/documentation/template-binding.html).
+
+Add the following script to the web page. Place it close to the elements that will
+use it, like between the `.worldwind-overlay` `<div/>` and the search `#preview` `<div/>`.
+
+```html
+<!--Layer List Template-->
+<script type="text/html" id="layer-list-template">
+  <button type="button" class="list-group-item list-group-item-action" 
+    data-bind="click: $root.toggleLayer, css: { active: $data.enabled }">
+      <span data-bind="text: $data.displayName"></span>
+  </button>
+</script>
+```
+
+Now we will reference the "layer-list-template" in the Layers and Settings panels.
+In the Layers panel, replace the `.card-body` `<div/>` contents with this HTML:
+
+```html
+<div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: overlayLayers}"></div>
+<hr/>
+<div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: baseLayers}"></div>
+```
+In the Settings panel, replace the `.card-body` `<div/>` contents with this HTML:
+
+```html
+<div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: settingLayers}"></div>
+```
+
+### Bind the Views to the View Models
 
 
 ## Summary
