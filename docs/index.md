@@ -12,7 +12,9 @@ customizable web app ready to be deployed to your site. This tutorial demonstrat
 - Going to locations
 - Multi-globe support
 
-Are you interested WorldWind web app using [React](https://reactjs.org)? Look here: [WorldWind React](https://github.com/emxsys/worldwind-react-app).
+This is what we will build:
+<iframe width="100%" height="700" src="//jsfiddle.net/emxsys/e0a2z1km/embedded/result/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
 
 ## Quick Start
 
@@ -21,14 +23,14 @@ Do you want to start developing right away?
 - Download the documentation and the completed web app: [Complete Source](https://github.com/emxsys/worldwind-web-app-tutorial/archive/master.zip)
 - View the completed tutorial: [Final Result](https://jsfiddle.net/emxsys/e0a2z1km/)
 
+Are you interested in building a WorldWind web app using [React](https://reactjs.org)? 
+Look here: [WorldWind React](https://github.com/emxsys/worldwind-react-app).
+
+
 ## Tutorial
 
-Here's what we'll build:
-
-<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/e0a2z1km/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-### Lessons
 - [Lesson 1: HTML with Bootstrap](lesson-1.md) 
 - [Lesson 2: WorldWind Globe](lesson-2.md) 
 - [Lesson 3: Layer Management with Knockout](lesson-3.md) 
 - [Lesson 4: Place Search and Geocoding](lesson-4.md) 
+
