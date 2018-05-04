@@ -329,13 +329,14 @@ functional and responsive:
 
 - The __Layers__, __Markers__ and __Settings__ buttons open their respective panels
 - The __Search__ button opens the __Preview__ modal dialog
-- The `<canvas/>` element that is reserved for the globe is the full width of the page
+- The `<canvas/>` element for the globe that is the full width of the page with
+with a background color 
 - The branding text opens a link to an external page
 
 ##### Lession 1 Code
 
 Here's the complete code for lesson 1: A web app prototype sans globe.
-<script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
+<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 Following are some explanations of the components used in the HTML. If you're not
 interested you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
@@ -502,7 +503,7 @@ layer's category and other layer properties.
 Here's the complete code for lesson 2: A web app prototype with a functioning 
 globe and layers.
 
-<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 ---
 
