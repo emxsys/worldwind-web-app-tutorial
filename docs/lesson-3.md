@@ -30,13 +30,12 @@ a change occurs we will update a timestamp for the category. We will use a
 Knockout [observable](http://knockoutjs.com/documentation/observables.html)
 to signal a change to any subscribers (e.g., the layers view-model).
 
-In `Globe`'s constructor, add a categoryTimestamps property that maps categories 
-to observable timestamps.
+In our `Globe`'s constructor, add a categoryTimestamps property that maps 
+categories to observable timestamps.
 ```javascript
 // Holds a map of category and observable timestamp pairs
 this.categoryTimestamps = new Map();
 ```
-
 
 Add the following two methods to our `Globe` that operate on the 
 `categoryTimestamps` property.
@@ -67,9 +66,9 @@ updateCategoryTimestamp(category) {
 ```
 
 Also add the following `toggleLayer` method that will be used by the view models
-to toggled the `enabled` property of the layers. Note that toggling a layer
+to toggle the `enabled` property of a layer. Note that toggling a layer
 will invoke `updateCategoryTimestamp`.  Also note how our method enforces
-a rule that only allows one 'base' layer to be enabled at a time.
+an application rule that only allows one 'base' layer to be enabled at a time.
 
 ```javascript
 /**
@@ -79,7 +78,8 @@ a rule that only allows one 'base' layer to be enabled at a time.
  * @param {WorldWind.Layer} layer
  */
 toggleLayer(layer) {
-    // Apply rule: only one "base" layer can be enabled at a time
+
+    // Multiplicity Rule: only [0..1] "base" layers can be enabled at a time
     if (layer.category === 'base') {
         this.wwd.layers.forEach(function (item) {
             if (item.category === 'base' && item !== layer) {
@@ -98,7 +98,7 @@ toggleLayer(layer) {
 ```
 
 And finally, we need to update the category timestamps when we add a layer. 
-Copy/paste this code to the end of our `Globe.addLayers` method
+Copy/paste this code to the end of our `Globe.addLayers` method:
 
 ```javascript
 // Signal that this layer category has changed
