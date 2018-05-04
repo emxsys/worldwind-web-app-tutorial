@@ -4,7 +4,7 @@
 - Menus and panels for displaying content.
 - Customizable, themes, CSS
 
-### Prerequisites
+## Prerequisites
 
 Create the files for a basic web app in your favorite IDE or editor.
 
@@ -12,12 +12,12 @@ Create the files for a basic web app in your favorite IDE or editor.
 - custom.css
 - app.js
 
-If you want to start with a Bootstrap example, you can download this template: 
-[Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
+If you want to start with one of the [Bootstrap Examples](http://getbootstrap.com/docs/4.0/examples/), 
+you can check out this template: [Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
 
 ---
 
-### Dependencies 
+## Dependencies 
 
 We're going to add the CDN links for the Bootstrap and Font Awesome CSS, plus
 a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
@@ -63,7 +63,7 @@ edit the `<title>`.
 
 ---
 
-### NavBar: The Main Menu
+## NavBar: The Main Menu
 
 Our web app uses a Bootstrap [Navbar](https://getbootstrap.com/docs/4.0/components/navbar/) 
 component to create the main menu at the top of the page. The Navbar is responsive: 
@@ -142,7 +142,7 @@ control the Navbar's text color and the `.bg-*` classes control the Navbar's
 
 ---
 
-### Main Content
+## Main Content
 
 Now we'll add the elements that will host the globe, the layers, markers and 
 settings panels, and and the search preview modal. These elements won't have 
@@ -306,7 +306,7 @@ $(document).ready(function() {
 ```
 ---
 
-#### Summary
+### Summary
 
 At this stage you have a functioning prototype of the web app. The menu system is
 functional and responsive:
@@ -317,16 +317,17 @@ functional and responsive:
 with a background color 
 - The branding text opens a link to an external page
 
-##### Lession 1 Code
+#### Lession 1 Code
 
 Here's the complete code for lesson 1: A web app prototype sans globe.
 
-<script async src="//jsfiddle.net/emxsys/wun3zg0c/embed/"></script>
+<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
+### Notes
 Following are some explanations of the components used in the HTML. If you're not
-interested you can skip ahead to [Lesson 2](#lesson-2-worldwind-globe).
+interested you can skip ahead to [Lesson 2](lesson-2.md).
 
-##### Full Width and Padding
+#### Full Width and Padding
 The `<main/>` element, above, hosts main content of our web app. We want the 
 element to be the full width of the page so we apply the Bootstrap `.container-fluid` 
 class (versus `.container`) to the element. We also also override Bootstrap's 
@@ -335,10 +336,12 @@ part of Bootstrap's [spacing utilities](https://getbootstrap.com/docs/4.0/utilit
 You can experiment with other padding options.
 
 
-##### Cards: Panels for layers and settings
+#### Cards: Panels for layers and settings
 
 We'll use Bootstrap [Card](https://getbootstrap.com/docs/4.0/components/card/) 
 components to host the WorldWind layers and settings content. Bootstrap includes 
 a few options for laying out a series of cards. We'll use Masonry-like columns 
 by wrapping them in `.card-columns`.
 
+
+<iframe width="100%" height="300" src="//jsfiddle.net/emxsys/wun3zg0c/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
