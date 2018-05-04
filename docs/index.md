@@ -27,7 +27,7 @@ Are you interested in building a WorldWind web app using [React](https://reactjs
 Look here: [WorldWind React](https://github.com/emxsys/worldwind-react-app).
 
 
-## Tutorial
+## Let's Begin
 
 - [Lesson 1: HTML with Bootstrap](lesson-1.md) 
 - [Lesson 2: WorldWind Globe](lesson-2.md) 
