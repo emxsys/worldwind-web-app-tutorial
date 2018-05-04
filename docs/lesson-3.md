@@ -10,25 +10,27 @@ In a hurry? View the completed code: [Lesson 3](https://jsfiddle.net/emxsys/sggs
 
 ### Include the Knockout library
 
-Knockout provides a mechanism for displaying model data (e.g., layers) in 
-views (e.g., the layer panel HTML). You put _observable_ model data into 
-in simple _view-model_ objects which are _bound_ to the HTML views.  
+[Knockout](http://knockoutjs.com/index.html) provides a mechanism for displaying 
+model data (e.g., WorldWindow.layers) in views (e.g., the Layers panel). You put
+ _observable_ model data into in simple _view-model objects_ which are then 
+_bound_ to the HTML views.
+
 When the view-model data changes, your UI automatically changes.
 
-This is known as _model-view-view model_ (MVVM) pattern. 
-
-We will use a Knockout library hosted on a CDN. Add this line of code to the 
+We will use Knockout hosted on a CDN. Add this line of code to the 
 list of JavaScript scripts at the bottom of your web page:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
 ```
 
-### Make changes to the Globe's layers observable
+### Observing changes in the Globe's layers
 
-In our web app we want to know if a change occurs within a layer category.  When
-a change occurs we will update a timestamp for the category. We will use a 
-Knockout [observable](http://knockoutjs.com/documentation/observables.html)
-to signal a change to any subscribers (e.g., the layers view-model).
+In our web app we need to know when change occurs within a layer category so the 
+UI can be updated. We will use a simple timestamp associated with each category to 
+capture changes. The timestamps will be contained within a Knockout
+[observable](http://knockoutjs.com/documentation/observables.html).
+When the timestamp is updated, Knockout will signal the change to any subscribers 
+to the observable. 
 
 In our `Globe`'s constructor, add a categoryTimestamps property that maps 
 categories to observable timestamps.
@@ -227,6 +229,7 @@ initialization code:
 
 ### Make it interesting: Add more layers
 
+The web app is more fun to play with when there are more layers to use.
 
 In app.js replace the  globe and layer initialization code with this block:
 
@@ -274,9 +277,18 @@ In app.js replace the  globe and layer initialization code with this block:
   globe.addLayer(new WorldWind.AtmosphereLayer(), {
     category: "setting",
     enabled: false
-  });```
+  });
+```
 
 ## Summary
+
+At this stage you have a web app with a functioning globe, navigation and now
+layer management
+
+-
+-
+
+Here's the complete code for lesson 3: a web app with layer management.
 
 <iframe width="100%" height="500" src="//jsfiddle.net/emxsys/sggs24bL/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
