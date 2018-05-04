@@ -365,8 +365,9 @@ web page:
 
 ### Create the Globe class
 
-Now we will create a Globe class to encapsulate the `WorldWindow` object (wwd). 
-We create a globe and it's underlying `WorldWindow` like this:
+Now we will create a Globe class to encapsulate the 
+[`WorldWindow`](https://nasaworldwind.github.io/WebWorldWind/WorldWindow.html) 
+object (wwd). You create a globe and it's underlying `WorldWindow` like this:
 ```javascript
   let globe = new Globe("globe-canvas");
 ```
