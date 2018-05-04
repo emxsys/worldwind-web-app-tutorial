@@ -23,8 +23,16 @@ list of JavaScript scripts at the bottom of your web page:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
 ```
 
-### Add Layer Management to the Globe class
+### Make changes to the Globe's layers observable
 
+In our web app we want to know if a change occurs within a layer category.  When
+a change occurs we will update a timestamp for the category. We will use a 
+Knockout [observable](http://knockoutjs.com/documentation/observables.html)
+to signal a change to any subscribers (e.g., the layers view-model).
+
+```javascript
+
+```
 
 ### Create a View Model for Layers
 
