@@ -349,4 +349,6 @@ by wrapping them in `.card-columns`.
 
 ---
 
-[Home](index.md) | [Next: Lesson 2 - WorldWind Globe](lesson-2.md)
+### Next Steps
+- [Home](index.md) -
+- [Next: Lesson 2 - WorldWind Globe](lesson-2.md)

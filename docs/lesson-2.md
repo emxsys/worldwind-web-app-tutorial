@@ -146,7 +146,8 @@ globe and layers.
 
 <iframe width="100%" height="500" src="//jsfiddle.net/emxsys/7x6vcf78/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-
+---
+### Next Steps
 - [Home](index.md) 
 - [Prev: Lesson 1 - HTML with Bootstrap](lesson-1.md) 
 - [Next: Lesson 3 - Layer Management with Knockout](lesson-3.md)

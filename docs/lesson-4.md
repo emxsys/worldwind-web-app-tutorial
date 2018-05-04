@@ -2,4 +2,8 @@
 
 ## Lesson 4: Place Search and Geocoding
 
-[Home](index.md) |  [Prev: Lesson 3 - Layer Management](lesson-3.md)
+---
+
+### Next Steps:
+- [Home](index.md) 
+- [Prev: Lesson 3 - Layer Management](lesson-3.md)
