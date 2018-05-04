@@ -4,13 +4,14 @@
 - Menus and panels for displaying content.
 - Customizable, themes, CSS
 
-## Prerequisites
+### Prerequisites
 
-Create the files for a basic web app in your favorite IDE or editor.
+Our web app will consist of three files. Create the follwoing files in your 
+favorite IDE or editor.
 
-- index.html
-- custom.css
-- app.js
+- index.html (the web page)
+- custom.css (overrides)
+- app.js (JavaScript)
 
 If you want to start with one of the [Bootstrap Examples](http://getbootstrap.com/docs/4.0/examples/), 
 you can check out this template: [Bootstrap Starter Template](https://getbootstrap.com/docs/4.0/examples/starter-template/)
@@ -19,9 +20,10 @@ you can check out this template: [Bootstrap Starter Template](https://getbootstr
 
 ## Dependencies 
 
-We're going to add the CDN links for the Bootstrap and Font Awesome CSS, plus
+We're going to create the basic web page structure. We'll include the CDN 
+(content delivery network) links for the Bootstrap and Font Awesome CSS, plus
 a link to our **custom.css** file. Also, we're adding the JavaScript CDN links 
-for BootStrap and JQuery, plus our **app.js** file. 
+for BootStrap and JQuery, a link to our **app.js** file. 
 
 Copy/paste the following HTML into your web page.
 
@@ -58,7 +60,7 @@ Copy/paste the following HTML into your web page.
 ```
  
 The `<meta>` elements above are important for Bootstrap and must be included. 
-You can add other `<meta>` elements like author, description, etc. Feel fee to 
+You can add other `<meta>` elements like author, description, etc. Feel free to 
 edit the `<title>`.
 
 ---
