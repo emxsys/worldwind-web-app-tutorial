@@ -232,11 +232,12 @@ initialization code:
 The web app is more fun to play with when there are more layers to use. We well
 add some more layers to the web app and we'll explore a few of the 
 [WorldWind.Layer](https://nasaworldwind.github.io/WebWorldWind/Layer.html) 
-properties.
+properties that we can set via the options object
 
-- enabled
-- opacity
-- detailControl
+- enabled: controls the initial visibility of the layer.
+- opacity: controls the opacity of a layer. 0 is transparent and 1 is opaque.
+- detailControl: controls when a higher level-of-detail is requested for the zoom level.
+- time: on the `AtmosphereLayer` it enables the day/night effect.
 
 In app.js replace the  globe and layer initialization code with this block:
 
@@ -292,7 +293,7 @@ In app.js replace the  globe and layer initialization code with this block:
 ## Summary
 
 At this stage you have a web app with a functioning globe, navigation and now
-layer management
+layer management. 
 
 -
 -
