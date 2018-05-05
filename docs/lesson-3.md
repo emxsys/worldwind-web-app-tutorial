@@ -229,7 +229,14 @@ initialization code:
 
 ### Make it interesting: Add more layers
 
-The web app is more fun to play with when there are more layers to use.
+The web app is more fun to play with when there are more layers to use. We well
+add some more layers to the web app and we'll explore a few of the 
+[WorldWind.Layer](https://nasaworldwind.github.io/WebWorldWind/Layer.html) 
+properties.
+
+- enabled
+- opacity
+- detailControl
 
 In app.js replace the  globe and layer initialization code with this block:
 
@@ -273,10 +280,12 @@ In app.js replace the  globe and layer initialization code with this block:
   globe.addLayer(new WorldWind.StarFieldLayer(), {
     category: "setting",
     enabled: false
+    displayName: "Stars"
   });
   globe.addLayer(new WorldWind.AtmosphereLayer(), {
     category: "setting",
-    enabled: false
+    enabled: false,
+    time: null // new Date()
   });
 ```
 
