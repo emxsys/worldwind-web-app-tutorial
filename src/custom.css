@@ -3,15 +3,27 @@ body {
     padding-top: 3.5rem;
 }
 
-.worldwindow {
+.globe {
     width: 100%;
     height: calc(100vh - 3.5rem);
     background-color: black;
 }
 
-.worldwindow-overlay {
+.globe-overlay {
     position: absolute;
     top: 3.5rem;
+}
+
+.globe-card {
+    background:rgba(255,255,255,0.7);
+}
+
+.globe-button {
+    background:rgba(255,255,255,0.25);
+}
+
+.globe-dropdown {
+    background:rgba(255,255,255,0.25);
 }
 
 /*When the modal fills the screen it has no margin on top and bottom*/
@@ -42,9 +54,6 @@ body {
   overflow-y: auto;
 }
 
-.globe-card {
-    background:rgba(255,255,255,0.7);
-}
 
 
 /*Extra small devices (portrait phones, less than 576px)*/

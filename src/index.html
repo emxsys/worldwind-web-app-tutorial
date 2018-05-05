@@ -74,7 +74,7 @@
         <main role="main" class="container-fluid p-0">
 
             <!-- WorldWindow -->
-            <div id="globe" class="worldwindow p-0">
+            <div id="globe" class="globe p-0">
                 <!--.d-block ensures the size is correct (prevents a scrollbar from appearing)-->
                 <canvas id="globe-canvas" class="d-block"
                         style="width: 100%; height: 100%; 
@@ -82,12 +82,40 @@
                     Try Chrome or FireFox.
                 </canvas>            
             </div>
-
-            <!--WorldWindow overlays-->
-            <div class="worldwindow-overlay noninteractive w-100">
+            <!--WorldWindow Tools-->
+            <div id="tools" class="globe-overlay noninteractive">
+                <!-- Add Marker button and palette -->
+                <div class="btn-group interactive p-3">
+                    <button type="button" 
+                            class="btn btn-primary btn-sm globe-button p-0"
+                            data-bind="click: $root.armDropMarker">
+                        <span class="fas fa-plus" aria-hidden="true"></span>
+                        <img width="30px" height="28px;" 
+                             data-bind="attr:{src: $root.selectedMarkerImage}"/>
+                    </button>
+                    <button type="button" id="marker-palette" 
+                            class="btn btn-primary btn-sm globe-button dropdown-toggle" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Markers Dropdown</span>
+                    </button>
+                    <!-- Bind the list to the 'markerPalette' observableArray -->
+                    <ul id="marker-palette" 
+                        class="dropdown-menu globe-dropdown" 
+                        style="left: initial; min-width: 30px"
+                        data-bind="foreach: markerPalette">
+                        <li data-bind="click: $root.selectedMarkerImage">
+                            <a><img width="30px" height="30px;" data-bind="attr:{src: $data}, click: $root.armDropMarker"/></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--WorldWindow Panels-->
+            <div class="globe-overlay noninteractive">
                 <div class="card-columns">
                     <!--Layers-->
-                    <div class="collapse" id="layers">
+                    <div id="layers" class="collapse" >
                         <div class="card globe-card interactive">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -98,14 +126,14 @@
                                     </button></h5>
                             </div>
                             <div class="card-body">
-                                <div className="list-group" data-bind="template: { name: 'layer-list-template', foreach: overlayLayers}"></div>
+                                <div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: overlayLayers}"></div>
                                 <hr/>
-                                <div className="list-group" data-bind="template: { name: 'layer-list-template', foreach: baseLayers}"></div>
+                                <div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: baseLayers}"></div>
                             </div>                    
                         </div>
                     </div>
                     <!--Markers-->
-                    <div class="collapse" id="markers">
+                    <div id="markers" class="collapse">
                         <div class="card globe-card interactive">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -116,12 +144,27 @@
                                     </button></h5>
                             </div>                
                             <div class="card-body">
-                                <p class="card-text">Marker list goes here.</p>
+                                    <!-- Bind the list to the 'markers' observableArray -->
+                                    <ul id="markers-list" class="list-group" data-bind="foreach: $root.markers">
+                                        <li class="list-group-item list-group-item-action p-0">
+                                            <div class="btn-group" role="group">
+                                                <!-- Goto Button -->
+                                                <button type="button" class="btn btn-light" data-bind="click: $root.gotoMarker">
+                                                    <span><img width="16px" height="16px" data-bind="attr:{src: $data.attributes.imageSource}" />  </span>
+                                                    <span data-bind="text: $data.label"></span>
+                                                </button>
+                                                <!-- Edit Button -->
+                                                <button type="button" class="btn btn-light fas fa-edit" data-bind="click: $root.editMarker"></button>
+                                                <!-- Delete Button -->
+                                                <button type="button" class="btn btn-light fas fa-trash" data-bind="click: $root.removeMarker"></button>
+                                            </div>
+                                        </li>
+                                    </ul>
                             </div>                    
                         </div>
                     </div>
                     <!--Settings-->
-                    <div class="collapse" id="settings">
+                    <div id="settings" class="collapse">
                         <div class="card globe-card interactive">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -132,7 +175,9 @@
                                     </button></h5>
                             </div>                
                             <div class="card-body">
-                                <div className="list-group" data-bind="template: { name: 'layer-list-template', foreach: settingLayers}"></div>
+                                <div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: settingLayers}"></div>
+                                <hr/>
+                                <div class="list-group" data-bind="template: { name: 'layer-list-template', foreach: debugLayers}"></div>
                             </div>                    
                         </div>
                     </div>
@@ -143,68 +188,68 @@
                             data-bind="click: $root.toggleLayer, css: { active: $data.enabled }">
                         <span data-bind="text: $data.displayName"></span>
                     </button>
-                    </script>   
-                </div>
-                <!--Search Preview Dialog-->
-                <div id="preview" class="hidden">
-                    <div id="previewDialog" class="modal" tabindex="-1" role="dialog" >
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Search Results</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                </script>   
+            </div>
+            <!--Search Preview Dialog-->
+            <div id="preview" class="hidden">
+                <div id="previewDialog" class="modal" tabindex="-1" role="dialog" >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Search Results</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-body-canvas pb-3" title="Preview" > 
+                                    <canvas id="preview-canvas" style="width: 100%; height: 100%;">
+                                        <h1>Your browser does not support HTML5 Canvas.</h1>
+                                    </canvas>                
                                 </div>
-                                <div class="modal-body">
-                                    <div class="modal-body-canvas pb-3" title="Preview" > 
-                                        <canvas id="preview-canvas" style="width: 100%; height: 100%;">
-                                            <h1>Your browser does not support HTML5 Canvas.</h1>
-                                        </canvas>                
-                                    </div>
-                                    <div class="modal-body-table">
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
-                                            MapQuest API key missing. Get a free key at 
-                                            <a href="https://developer.mapquest.com/" class="alert-link" target="_blank">developer.mapquest.com</a>
-                                            and set the MAPQUEST_API_KEY variable to your key.
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>                                        
-                                        </div>                                        
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Type</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody data-bind="template: { name: 'search-results-template', foreach: searchResults}"></tbody>
-                                        </table>
-                                        <script type="text/html" id="search-results-template">
-                                            <tr data-bind="click: $parent.previewSelection">
-                                                <td><span data-bind="text: $data.display_name"></span></td>
-                                                <td><span data-bind="text: $data.type"></span></td>
+                                <div class="modal-body-table">
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
+                                        MapQuest API key missing. Get a free key at 
+                                        <a href="https://developer.mapquest.com/" class="alert-link" target="_blank">developer.mapquest.com</a>
+                                        and set the MAPQUEST_API_KEY variable to your key.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>                                        
+                                    </div>                                        
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Type</th>
                                             </tr>
-                                            </script>                                        
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="enable: selected, click: gotoSelected">Go to</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    </div>
+                                        </thead>
+                                        <tbody data-bind="template: { name: 'search-results-template', foreach: searchResults}"></tbody>
+                                    </table>
+                                    <script type="text/html" id="search-results-template">
+                                        <tr data-bind="click: $parent.previewSelection">
+                                            <td><span data-bind="text: $data.display_name"></span></td>
+                                            <td><span data-bind="text: $data.type"></span></td>
+                                        </tr>
+                                    </script>                                        
                                 </div>
                             </div>
-                        </div>                    
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="enable: selected, click: gotoSelected">Go to</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
                     </div>
+                </div>                    
+            </div>
 
-                </main><!-- /.container-fluid -->
+        </main><!-- /.container-fluid -->
 
-                <!-- JavaScript placed at the end of the document so the page loads faster -->
-                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-                <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
-                <script src="app.js"></script>
-            </body>
-        </html>
+        <!-- JavaScript placed at the end of the document so the page loads faster -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+        <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
