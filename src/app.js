@@ -1,3 +1,5 @@
+/* global WorldWind */
+
 $(document).ready(function () {
     "use strict";
 
@@ -5,6 +7,12 @@ $(document).ready(function () {
     // Without your own key you will be using a limited WorldWind developer's key.
     // See: https://www.bingmapsportal.com/ to register for your own key and then enter it below
     const BING_API_KEY = "";
+    if (BING_API_KEY === null || BING_API_KEY === "") {
+        // TODO: alert
+    } else {
+        // Initialize WorldWind properties before creating the first WorldWindow
+        WorldWind.BingMapsKey = BING_API_KEY;
+    }
 
     // Set the MapQuest API key used for the Nominatim service.
     // Get your own key at https://developer.mapquest.com/
@@ -28,10 +36,8 @@ $(document).ready(function () {
             if (projectionName) {
                 this.changeProjection(projectionName);
             }
-            // Observables
-            this.baseLayersLastUpdate = ko.observable(new Date());
-            this.overlayLayersLastUpdate = ko.observable(new Date());
-            this.settingLayersLastUpdate = ko.observable(new Date());
+            // A map of category and 'observable' timestamp pairs
+            this.categoryTimestamps = new Map();
             // Add a BMNGOneImageLayer background layer. We're overriding the default 
             // minimum altitude of the BMNGOneImageLayer so this layer always available.
             this.addLayer(new WorldWind.BMNGOneImageLayer(), {category: "background", minActiveAltitude: 0});
@@ -87,7 +93,7 @@ $(document).ready(function () {
         }
 
         /**
-         * Returns a new array of layers in the given category.
+         * Returns a new array of layers within the given category.
          * @param {String} category E.g., "base", "overlay" or "setting".
          * @returns {Array}
          */
@@ -122,10 +128,16 @@ $(document).ready(function () {
             // Add the layer to the globe
             this.wwd.addLayer(layer);
 
-            // Notify observers of a change
-            this.updateLayers(layer.category);
+            // Signal a change in the category
+            this.updateCategoryTimestamp(layer.category);
         }
 
+        /**
+         * Toggles the enabled state of the given layer and updates the layer
+         * catetory timestamp. Applies a rule to the 'base' layers the ensures
+         * only one base layer is enabled.
+         * @param {WorldWind.Layer} layer
+         */
         toggleLayer(layer) {
             // Apply rule: only one "base" layer can be enabled at a time
             if (layer.category === 'base') {
@@ -140,25 +152,31 @@ $(document).ready(function () {
             // Trigger a redraw so the globe shows the new layer state ASAP
             this.wwd.redraw();
 
-            // Notify observers of a change
-            this.updateLayers(layer.category);
+            // Signal a change in the category
+            this.updateCategoryTimestamp(layer.category);
         }
 
-        updateLayers(category) {
-            const timestamp = new Date();
-            switch (category) {
-                case 'base':
-                    this.baseLayersLastUpdate(timestamp);
-                    break;
-                case 'overlay':
-                    this.overlayLayersLastUpdate(timestamp);
-                    break;
-                case 'setting':
-                    this.settingLayersLastUpdate(timestamp);
-                    break;
-                default:
+        /**
+         * Returns an observable containing the last update timestamp for the category.
+         * @param {String} category
+         * @returns {Observable} 
+         */
+        getCategoryTimestamp(category) {
+            if (!this.categoryTimestamps.has(category)) {
+                this.categoryTimestamps.set(category, ko.observable());
             }
+            return this.categoryTimestamps.get(category);
         }
+
+        /**
+         * Updates the timestamp for the given category.
+         * @param {String} category
+         */
+        updateCategoryTimestamp(category) {
+            let timestamp = this.getCategoryTimestamp(category);
+            timestamp(new Date());
+        }
+
     }
 
     function LayersViewModel(globe) {
@@ -168,9 +186,10 @@ $(document).ready(function () {
         self.overlayLayers = ko.observableArray(globe.getLayers('overlay').reverse());
 
         // Update the view model whenever the model changes
-        globe.baseLayersLastUpdate.subscribe(lastUpdated =>
+        globe.getCategoryTimestamp('base').subscribe(newValue =>
             self.loadLayers(globe.getLayers('base'), self.baseLayers));
-        globe.overlayLayersLastUpdate.subscribe(lastUpdated =>
+
+        globe.getCategoryTimestamp('overlay').subscribe(newValue =>
             self.loadLayers(globe.getLayers('overlay'), self.overlayLayers));
 
         self.loadLayers = function (layers, observableArray) {
@@ -190,7 +209,7 @@ $(document).ready(function () {
         self.settingLayers = ko.observableArray(globe.getLayers('setting').reverse());
 
         // Update the view model whenever the model changes
-        globe.settingLayersLastUpdate.subscribe(lastUpdated =>
+        globe.getCategoryTimestamp('setting').subscribe(newValue =>
             self.loadLayers(globe.getLayers('setting'), self.settingLayers));
 
         self.loadLayers = function (layers, observableArray) {
@@ -315,24 +334,53 @@ $(document).ready(function () {
     // Construct our web app
     // ----------------------
 
-    // Initialize WorldWind properties before creating the first WorldWindow
-    if (BING_API_KEY === null || BING_API_KEY === "") {
-        // Warning: using a limited WorldWind developer's key for Bing resources.
-    } else {
-        WorldWind.BingMapsKey = BING_API_KEY;
-    }
-
     // Create the primary globe
     let globe = new Globe("globe-canvas");
     // Add layers ordered by drawing order: first to last
-    globe.addLayer(new WorldWind.BMNGLayer(), {category: "base"});
-    globe.addLayer(new WorldWind.BMNGLandsatLayer(), {category: "base", enabled: false});
-    globe.addLayer(new WorldWind.BingAerialLayer(), {category: "base", enabled: false});
-    globe.addLayer(new WorldWind.BingAerialWithLabelsLayer(), {category: "base", enabled: false, detailControl: 1.5});
-    globe.addLayer(new WorldWind.BingRoadsLayer(), {category: "overlay", enabled: false, detailControl: 1.5, opacity: 0.75});
-    globe.addLayer(new WorldWind.CoordinatesDisplayLayer(globe.wwd), {category: "setting"});
-    globe.addLayer(new WorldWind.ViewControlsLayer(globe.wwd), {category: "setting"});
-    globe.addLayer(new WorldWind.CompassLayer(), {category: "setting", enabled: false});
+    // Add layers to the globe 
+    // Add layers ordered by drawing order: first to last
+    globe.addLayer(new WorldWind.BMNGLayer(), {
+        category: "base"
+    });
+    globe.addLayer(new WorldWind.BMNGLandsatLayer(), {
+        category: "base",
+        enabled: false
+    });
+    globe.addLayer(new WorldWind.BingAerialLayer(), {
+        category: "base",
+        enabled: false
+    });
+    globe.addLayer(new WorldWind.BingAerialWithLabelsLayer(), {
+        category: "base",
+        enabled: false,
+        detailControl: 1.5
+    });
+    globe.addLayer(new WorldWind.BingRoadsLayer(), {
+        category: "overlay",
+        enabled: false,
+        detailControl: 1.5,
+        opacity: 0.80
+    });
+    globe.addLayer(new WorldWind.CoordinatesDisplayLayer(globe.wwd), {
+        category: "setting"
+    });
+    globe.addLayer(new WorldWind.ViewControlsLayer(globe.wwd), {
+        category: "setting"
+    });
+    globe.addLayer(new WorldWind.CompassLayer(), {
+        category: "setting",
+        enabled: false
+    });
+    globe.addLayer(new WorldWind.StarFieldLayer(), {
+        category: "setting",
+        enabled: false,
+        displayName: "Stars"
+    });
+    globe.addLayer(new WorldWind.AtmosphereLayer(), {
+        category: "setting",
+        enabled: false,
+        time: null // new Date() // activates day/night mode
+    });
 
     // Activate the Knockout bindings between our view models and the html
     this.layers = new LayersViewModel(globe);
