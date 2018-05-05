@@ -295,8 +295,13 @@ In app.js replace the  globe and layer initialization code with this block:
 At this stage you have a web app with a functioning globe, navigation and now
 layer management. 
 
--
--
+Here's what we accomplished:
+
+- Enabled change notification for the layer categories via observable timestamps.
+- Created view models with observable arrays for the layers and settings data.
+- Created a Knockout view template used in the Layers and Settings panels.
+- Bound the view models to the views.
+- Examined more WorldWind layers and their properties.
 
 Here's the complete code for lesson 3: a web app with layer management.
 
