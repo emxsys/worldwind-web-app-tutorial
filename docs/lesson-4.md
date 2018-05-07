@@ -156,7 +156,9 @@ function SearchViewModel(globe, preview) {
 The new `PreviewViewModel` will display the search results in a table and on
 a 2D map (another `Globe` object). Its `previewResults` function loads
 a Knockout observable array with the results.  These results are used to populate
-the table's rows and the preview globe's markers.
+the table's rows and the preview globe's placemarks.  When table row is clicked, 
+its onClick event invokes `previewSelection` which centers the preview globe/map
+on the selected item's location. 
 
 Add the following JavaScript code for the `PreviewViewModel` to app.js below the 
 `SearchViewModel`.
@@ -286,6 +288,22 @@ contents of the `<div class="modal-body"/>` this HTML:
     </script>                                        
 </div>
 ```
+
+Now we need to bind our view models to their views.
+
+Add this code to the list of view models being created in app.js.
+```javascript
+let preview = new PreviewViewModel(globe);
+let search = new SearchViewModel(globe, preview.previewResults);
+```
+
+Also this code to the list of view and view model bindings in app.js.
+```javascript
+ko.applyBindings(search, document.getElementById('search'));
+ko.applyBindings(preview, document.getElementById('preview'));
+```
+
+## Summary
 
 ---
 
