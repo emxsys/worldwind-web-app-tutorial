@@ -25,7 +25,8 @@ Change the `Globe` constructor by adding the `projectionName` argument, like thi
 constructor(canvasId, projectionName) {
 ```
 
-Then add this code to the constructor's body to keep track of the current projection:
+Then add this code to the constructor's body to keep track of the current projection,
+add it after the `this.wwd` property is assigned:
 ```javascript
 // Projection support
 this.roundGlobe = this.wwd.globe;   // The default is a 3D globe
