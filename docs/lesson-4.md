@@ -243,6 +243,22 @@ function PreviewViewModel(primaryGlobe) {
 }
 ```
 
+### Bind the Search Box
+
+Replace the existing Search Box `<div/>` in the Navbar with this block, which 
+includes a data-binding to the `searchText` observable in the view model, and 
+also a data-binding for click a handler to the `performSearch` function.
+
+```html
+<div id="search" class="form-inline">
+  <input id="searchText" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" 
+    data-bind="value: searchText, valueUpdate: 'keyup'">
+  <button id="searchButton" class="btn btn-outline-success" data-bind="click: $root.performSearch">
+                <span class="fas fa-search" aria-hidden="true"></span>
+            </button>
+</div>
+```
+
 ### Show the Results in the Preview Dialog
 
 Now we will a `<canvas/>` for the preview globe and a `<table/>` to preview the 
@@ -250,42 +266,60 @@ results. The table rows are populated from an observable array via a Knockout
 [view template](http://knockoutjs.com/documentation/template-binding.html) 
 contained in a `<script/>`
 
-Copy the following block of HTML and pasted. Place it close to the elements that will
-use it, like between the `.worldwind-overlay` `<div/>` and the search `#preview` `<div/>`.
 
-In the Search Preview Dialog (`<div id="preview"/>`), replace the 
-contents of the `<div class="modal-body"/>` this HTML:
+In the web page, replace the Search Preview Dialog with this version which 
+includes the data-bindings for the table row data and the click event handlers:
 
 ```html
-<div class="modal-body-canvas pb-3" title="Preview" > 
-    <canvas id="preview-canvas" style="width: 100%; height: 100%;">
-        <h1>Your browser does not support HTML5 Canvas.</h1>
-    </canvas>                
-</div>
-<div class="modal-body-table">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
-        MapQuest API key missing. Get a free key at 
-        <a href="https://developer.mapquest.com/" class="alert-link" target="_blank">developer.mapquest.com</a>
-        and set the MAPQUEST_API_KEY variable to your key.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>                                        
-    </div>                                        
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-            </tr>
-        </thead>
-        <tbody data-bind="template: { name: 'search-results-template', foreach: searchResults}"></tbody>
-    </table>
-    <script type="text/html" id="search-results-template">
-        <tr data-bind="click: $parent.previewSelection">
-            <td><span data-bind="text: $data.display_name"></span></td>
-            <td><span data-bind="text: $data.type"></span></td>
-        </tr>
-    </script>                                        
+<div id="preview" class="hidden">
+  <div id="previewDialog" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Search Results</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body-canvas pb-3" title="Preview">
+            <canvas id="preview-canvas" style="width: 100%; height: 100%;">
+  <h1>Your browser does not support HTML5 Canvas.</h1>
+</canvas>
+          </div>
+          <div class="modal-body-table">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
+              MapQuest API key missing. Get a free key at
+              <a href="https://developer.mapquest.com/" class="alert-link" target="_blank">developer.mapquest.com</a> and set the MAPQUEST_API_KEY variable to your key.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+            </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Type</th>
+                </tr>
+              </thead>
+              <tbody data-bind="template: { name: 'search-results-template', foreach: searchResults}"></tbody>
+            </table>
+            <script type="text/html" id="search-results-template">
+              <tr data-bind="click: $parent.previewSelection">
+                <td><span data-bind="text: $data.display_name"></span></td>
+                <td><span data-bind="text: $data.type"></span></td>
+              </tr>
+            </script>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="enable: selected, click: gotoSelected">Go to</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
