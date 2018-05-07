@@ -1,7 +1,7 @@
 # How to Build a WorldWind Web App
 
 - [Home](index.md) 
-- <<Lesson 1: HTML with Bootstrap>>
+- Lesson 1: HTML with Bootstrap << 
 - [Lesson 2: WorldWind Globe](lesson-2.md) 
 - [Lesson 3: Layer Management with Knockout](lesson-3.md) 
 - [Lesson 4: Place Search and Geocoding](lesson-4.md) 
