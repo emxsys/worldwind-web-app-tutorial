@@ -243,12 +243,16 @@ function PreviewViewModel(primaryGlobe) {
 
 ### Show the Results in the Preview Dialog
 
-Now we will create buttons for all the layers in an observable array via a
-Knockout [view template](http://knockoutjs.com/documentation/template-binding.html).
-The template 
+Now we will a `<canvas/>` for the preview globe and a `<table/>` to preview the 
+results. The table rows are populated from an observable array via a Knockout 
+[view template](http://knockoutjs.com/documentation/template-binding.html) 
+contained in a `<script/>`
 
-Add the following script to the web page. Place it close to the elements that will
+Copy the following block of HTML and pasted. Place it close to the elements that will
 use it, like between the `.worldwind-overlay` `<div/>` and the search `#preview` `<div/>`.
+
+In the Search Preview Dialog (`<div id="preview"/>`), replace the 
+contents of the `<div class="modal-body"/>` this HTML:
 
 ```html
 <div class="modal-body-canvas pb-3" title="Preview" > 
