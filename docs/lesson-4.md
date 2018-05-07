@@ -36,7 +36,9 @@ if (projectionName) {
 }
 ```
 
-Finally, add these two functions to the `Globe` class:
+Finally, add these two functions to the `Globe` class after the constructor. The
+getter can be used in the UI to provide a list of supported projections. 
+`changeProjection` does just what it says.
 ```javascript
 /**
  * Returns the supported projection names.
@@ -100,8 +102,9 @@ Now a 'Globe' can be created with a specific projection or you can change it lat
 
 ### Add the Search Capabilities
 
-The [WorldWind.NominatimGeocoder]() encapulates the MapQuest's Nominatim service.
-We'll create a new `SearchViewModel` to get the user's search text and perform the 
+The [WorldWind.NominatimGeocoder](https://nasaworldwind.github.io/WebWorldWind/NominatimGeocoder.html) 
+encapsulates the MapQuest's Open Street Map Nominatim service. We'll create a 
+new `SearchViewModel` to get the user's search text and perform the 
 search. If the search text looks like a latitude, longitude pair (e.g.: 
 "34.2, -119.2") we'll simply center the globe on that location, otherwise we'll use 
 the `NominatimGeocoder` to lookup places that match the search text. The results
@@ -150,6 +153,11 @@ function SearchViewModel(globe, preview) {
 }
 ```
 
+The new `PreviewViewModel` will display the search results in a table and on
+a 2D map (another `Globe` object). Its `previewResults` function loads
+a Knockout observable array with the results.  These results are used to populate
+the table's rows and the preview globe's markers.
+
 Add the following JavaScript code for the `PreviewViewModel` to app.js below the 
 `SearchViewModel`.
 
@@ -183,6 +191,7 @@ function PreviewViewModel(primaryGlobe) {
     // Create an observable array who's contents are displayed in the preview
     this.searchResults = ko.observableArray();
     this.selected = ko.observable();
+
     // Shows the given search results in a table with a preview globe/map
     this.previewResults = function (results) {
         if (results.length === 0) {
@@ -212,6 +221,8 @@ function PreviewViewModel(primaryGlobe) {
         $('#previewDialog').modal();
         $('#previewDialog .modal-body-table').scrollTop(0);
     };
+
+    // Center's the preview globe on the selection and sets the selected item.
     this.previewSelection = function (selection) {
         let latitude = parseFloat(selection.lat),
             longitude = parseFloat(selection.lon),
@@ -221,6 +232,8 @@ function PreviewViewModel(primaryGlobe) {
         // Go to the posiion
         self.previewGlobe.wwd.goTo(location);
     };
+
+    // Centers the primary globe on the selected item
     this.gotoSelected = function () {
         // Go to the location held in the selected observable
         primaryGlobe.wwd.goTo(self.selected());
@@ -228,6 +241,47 @@ function PreviewViewModel(primaryGlobe) {
 }
 ```
 
+### Show the Results in the Preview Dialog
+
+Now we will create buttons for all the layers in an observable array via a
+Knockout [view template](http://knockoutjs.com/documentation/template-binding.html).
+The template 
+
+Add the following script to the web page. Place it close to the elements that will
+use it, like between the `.worldwind-overlay` `<div/>` and the search `#preview` `<div/>`.
+
+```html
+<div class="modal-body-canvas pb-3" title="Preview" > 
+    <canvas id="preview-canvas" style="width: 100%; height: 100%;">
+        <h1>Your browser does not support HTML5 Canvas.</h1>
+    </canvas>                
+</div>
+<div class="modal-body-table">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" data-bind="visible: showApiWarning">
+        MapQuest API key missing. Get a free key at 
+        <a href="https://developer.mapquest.com/" class="alert-link" target="_blank">developer.mapquest.com</a>
+        and set the MAPQUEST_API_KEY variable to your key.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>                                        
+    </div>                                        
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+            </tr>
+        </thead>
+        <tbody data-bind="template: { name: 'search-results-template', foreach: searchResults}"></tbody>
+    </table>
+    <script type="text/html" id="search-results-template">
+        <tr data-bind="click: $parent.previewSelection">
+            <td><span data-bind="text: $data.display_name"></span></td>
+            <td><span data-bind="text: $data.type"></span></td>
+        </tr>
+    </script>                                        
+</div>
+```
 
 ---
 
