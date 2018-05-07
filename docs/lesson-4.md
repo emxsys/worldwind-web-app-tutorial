@@ -16,26 +16,26 @@ View the completed code: [Lesson 4](https://jsfiddle.net/emxsys/fn4bhbuf/)
 
 ### Add 2D Projection Support
 
-We will use a 2D map in our search preview dialog so we need to add support for
-changing projections in our `Globe` class.
+We'll use a 2D map in our search preview dialog. WorldWind already has support
+for 2D projections, so all we need to do is add the ability to change the 
+projection to the `Globe` class. 
 
-Change the Globe's constructor by adding the `projectionName` argument, like this:
+Change the `Globe` constructor by adding the `projectionName` argument, like this:
 ```javascript
 constructor(canvasId, projectionName) {
 ```
 
-And add this code to the constructor's body to keep track of the current projection:
+Then add this code to the constructor's body to keep track of the current projection:
 ```javascript
 // Projection support
-this.roundGlobe = this.wwd.globe;
+this.roundGlobe = this.wwd.globe;   // The default is a 3D globe
 this.flatGlobe = null;
 if (projectionName) {
     this.changeProjection(projectionName);
 }
 ```
 
-Finally, add these two functions to the `Globe` class that change
-the projections
+Finally, add these two functions to the `Globe` class:
 ```javascript
 /**
  * Returns the supported projection names.
@@ -94,7 +94,7 @@ changeProjection(projectionName) {
 }
 ```
 
-Now a 'Globe' can be created with a specific projection or have it changed later.
+Now a 'Globe' can be created with a specific projection or you can change it later.
 
 
 ### Add the Search Capabilities
