@@ -12,7 +12,7 @@
 - Enable and disable layers
 - Configure WMS/WMTS layers
 
-In a hurry? View the completed code: [Lesson 3](https://jsfiddle.net/emxsys/sggs24bL/)
+View the completed code: [Lesson 3](https://jsfiddle.net/emxsys/sggs24bL/)
 
 ### Include the Knockout library
 
@@ -317,7 +317,4 @@ Here's the complete code for lesson 3: a web app with layer management.
 
 ### Next Steps
 - [Home](index.md) 
-- [Lesson 1: HTML with Bootstrap](lesson-1.md) 
-- [Lesson 2: WorldWind Globe](lesson-2.md) 
-- [Lesson 3: Layer Management with Knockout](lesson-3.md) 
 - [Lesson 4: Place Search and Geocoding](lesson-4.md) 
