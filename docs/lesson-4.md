@@ -339,6 +339,22 @@ ko.applyBindings(preview, document.getElementById('preview'));
 
 ## Summary
 
+Now you have a web app with a functioning globe, navigation, layer management and
+a place search feature 
+
+Here's what we accomplished:
+
+- Added 2D projections to the Globe class
+- Coupled a view model to the search box to get the search critera
+- Created a view model to capture the search results and couple them to a modal dialog
+- Implemented search for place names and addresses using MapQuest's Nominatim.
+- Previewed search result locations on a 2D map/globe with placemarks
+- Go to selected locations on the preview globe and primary globe.
+
+Here's the complete code for lesson 3: a web app with layer management.
+
+<iframe width="100%" height="700" src="//jsfiddle.net/emxsys/fn4bhbuf/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
 ---
 
 ### Next Steps:
