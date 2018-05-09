@@ -3,17 +3,20 @@ body {
     padding-top: 3.5rem;
 }
 
+/*Sets the size and style of the globe container*/
 .globe {
     width: 100%;
     height: calc(100vh - 3.5rem);
     background-color: black;
 }
 
+/*Sets the position of a container displayed over the globe container*/
 .globe-overlay {
     position: absolute;
     width: 100%;
     top: 3.5rem;
 }
+Sets the background color of Cards displayed over the globe
 .globe-card {
     background:rgba(255,255,255,0.7);
 }

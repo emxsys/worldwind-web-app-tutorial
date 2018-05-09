@@ -1,39 +1,74 @@
 body {
-  /*Account for the height of the navbar component*/
-  padding-top: 3.5rem;
+    /*Account for the height of the navbar component*/
+    padding-top: 3.5rem;
 }
 
+/*Sets the size and style of the globe container*/
 .globe {
-  width: 100%;
-  height: calc(100vh - 3.5rem);
-  background-color: black;
+    width: 100%;
+    height: calc(100vh - 3.5rem);
+    background-color: black;
 }
 
+/*Sets the position of a container displayed over the globe container*/
 .globe-overlay {
-  position: absolute;
-  width: 100%;
-  top: 3.5rem;
+    position: absolute;
+    width: 100%;
+    top: 3.5rem;
 }
+Sets the background color of Cards displayed over the globe
+.globe-card {
+    background:rgba(255,255,255,0.7);
+}
+
+/*When the modal fills the screen it has no margin on top and bottom*/
+/*Centers the modal*/
+.modal-dialog {
+    margin: 0 auto;
+}
+
+/*Sets the maximum height of the entire modal to 100% of the screen height*/
+.modal-content {
+    max-height: 100vh;
+}
+
+/*Sets the maximum height of the modal body to 90% of the screen height*/
+.modal-body {
+    max-height: 90vh;
+}
+
+/*Sets the height of a modal's canvas to 30% or 200px*/
+.modal-body-canvas {
+    max-height: 200px;
+    height: 30vh;
+}
+
+/*Sets the height of a modal's canvas to 60% minus the height of a footer*/
+.modal-body-table {
+    max-height: calc(60vh - 71px);
+    overflow-y: auto;
+}
+
 
 /* Prevents an element, like a <div/> from consuming user input */
 .noninteractive {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    pointer-events: none;
 }
 
 /* Allows an element to receive user input */
 /* Useful if a parent element is using .noniteractive */
 .interactive {
-  -webkit-touch-callout: auto !important;
-  -webkit-user-select: auto !important;
-  -khtml-user-select: auto !important;
-  -moz-user-select: auto !important;
-  -ms-user-select: auto !important;
-  -o-user-select: auto !important;
-  pointer-events: auto !important;
+    -webkit-touch-callout: auto !important;
+    -webkit-user-select: auto !important;
+    -khtml-user-select: auto !important;
+    -moz-user-select: auto !important;
+    -ms-user-select: auto !important;
+    -o-user-select: auto !important;
+    pointer-events: auto !important;
 }

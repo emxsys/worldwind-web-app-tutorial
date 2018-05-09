@@ -1,6 +1,16 @@
 $(document).ready(function () {
     "use strict";
 
+    // Set the Bing API key for Bing Maps
+    // Without your own key you will be using a limited WorldWind developer's key.
+    // See: https://www.bingmapsportal.com/ to register for your own key and then enter it below:
+    const BING_API_KEY = "";
+    if (BING_API_KEY) {
+        // Initialize WorldWind properties before creating the first WorldWindow
+        WorldWind.BingMapsKey = BING_API_KEY;
+    } else {
+        console.error("app.js: A Bing API key is required to use the Bing maps in production. Get your API key at https://www.bingmapsportal.com/");
+    }
     // Set the MapQuest API key used for the Nominatim service.
     // Get your own key at https://developer.mapquest.com/
     // Without your own key you will be using a limited WorldWind developer's key.
