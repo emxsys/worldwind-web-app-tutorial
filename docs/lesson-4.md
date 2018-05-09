@@ -366,7 +366,7 @@ Here's what we accomplished:
 - Previewed search result locations on a 2D map/globe with placemarks
 - Go to selected locations on the preview globe and primary globe.
 
-Here's the complete code for lesson 3: a web app with layer management.
+Here's the complete code for lesson 4:
 
 <iframe width="100%" height="700" src="//jsfiddle.net/emxsys/fn4bhbuf/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
@@ -374,3 +374,4 @@ Here's the complete code for lesson 3: a web app with layer management.
 
 ### Next Steps:
 - [Home](index.md) 
+- [WorldWind Web App Template](https://github.com/emxsys/worldwind-web-app)

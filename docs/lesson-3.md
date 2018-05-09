@@ -238,10 +238,27 @@ initialization code:
 
 ### Make it interesting: Add more layers
 
-The web app is more fun to play with when there are more layers to use. We well
-add some more layers to the web app and we'll explore a few of the 
+The web app is more fun to play with when there are more layers to use. One of 
+layers that we'll add is Bing, which requires an access key. Copy the following block of Javascript
+and paste it to app.js inside `$(document).ready(...)` function, above the 
+`Globe` class:
+
+```javascript
+    // Set the Bing API key for Bing Maps
+    // Without your own key you will be using a limited WorldWind developer's key.
+    // See: https://www.bingmapsportal.com/ to register for your own key and then enter it below:
+    const BING_API_KEY = "";
+    if (BING_API_KEY) {
+        // Initialize WorldWind properties before creating the first WorldWindow
+        WorldWind.BingMapsKey = BING_API_KEY;
+    } else {
+        console.error("app.js: A Bing API key is required to use the Bing maps in production. Get your API key at https://www.bingmapsportal.com/");
+    }
+```
+
+We well add some more layers to the web app and we'll explore a few of the 
 [WorldWind.Layer](https://nasaworldwind.github.io/WebWorldWind/Layer.html) 
-properties that we can set via the options object
+properties that we can set via the options object, such as:
 
 - enabled: controls the initial visibility of the layer.
 - opacity: controls the opacity of a layer. 0 is transparent and 1 is opaque.
