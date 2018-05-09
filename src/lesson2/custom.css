@@ -1,0 +1,39 @@
+body {
+  /*Account for the height of the navbar component*/
+  padding-top: 3.5rem;
+}
+
+.globe {
+  width: 100%;
+  height: calc(100vh - 3.5rem);
+  background-color: black;
+}
+
+.globe-overlay {
+  position: absolute;
+  width: 100%;
+  top: 3.5rem;
+}
+
+/* Prevents an element, like a <div/> from consuming user input */
+.noninteractive {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  pointer-events: none;
+}
+
+/* Allows an element to receive user input */
+/* Useful if a parent element is using .noniteractive */
+.interactive {
+  -webkit-touch-callout: auto !important;
+  -webkit-user-select: auto !important;
+  -khtml-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  -o-user-select: auto !important;
+  pointer-events: auto !important;
+}

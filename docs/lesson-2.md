@@ -2,7 +2,7 @@
 
 - [Home](index.md) 
 - [Lesson 1: HTML with Bootstrap](lesson-1.md) 
-- Lesson 2: WorldWind Globe <<
+- Lesson 2: >> WorldWind Globe <<
 - [Lesson 3: Layer Management with Knockout](lesson-3.md) 
 - [Lesson 4: Place Search and Geocoding](lesson-4.md) 
 
@@ -17,7 +17,8 @@ In a hurry? Here's the completed code: [Lesson 2](https://jsfiddle.net/emxsys/7x
 ### Include the WorldWind library
 
 We will use the WorldWind library hosted on the NASA servers. Add this line of 
-code to the list of JavaScript scripts at the bottom of your web page:
+code to the list of JavaScript scripts at the bottom of your web page, place it 
+before the app.js script:
 ```html
 <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
 ```
@@ -30,8 +31,9 @@ object (wwd).
 
 In our web app we will be using layer _categories_ to act on subsets of the
 `WorldWindow.layers`. We add layers to the `WorldWindow` via the `Globe.addLayer` 
-function to assign a category and to update the layer's properties via a 
-convenient _options_ object.
+function to assign a category and to update the layer's properties via an 
+_options_ object. The `Globe.addLayer` function will conveniently 
+apply all the properties of the options object to the layer.
  
 Copy the following block of JavaScript to the __app.js__ file.
 ###### JavaScript
@@ -132,6 +134,7 @@ Copy this block of JavaScript code the __app.js__ file and paste it below the
   });
   globe.addLayer(new WorldWind.CompassLayer(), {
     category: "setting",
+    enabled: false
   });
 ```
 ---
@@ -156,6 +159,6 @@ globe and layers.
 
 ### Next Steps
 - [Home](index.md) 
-- [Lesson 2: WorldWind Globe](lesson-2.md) 
+- [Lesson 3: Layer Management with Knockout](lesson-3.md) 
 
 

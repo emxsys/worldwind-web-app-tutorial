@@ -3,7 +3,7 @@
 - [Lesson 1: HTML with Bootstrap](lesson-1.md) 
 - [Lesson 2: WorldWind Globe](lesson-2.md) 
 - [Lesson 3: Layer Management with Knockout](lesson-3.md) 
-- Lesson 4: Place Search and Geocoding <<
+- Lesson 4: >> Place Search and Geocoding <<
 
 ## Lesson 4: Place Search and Geocoding
 
@@ -102,13 +102,28 @@ Now a 'Globe' can be created with a specific projection or you can change it lat
 
 ### Add the Search Capabilities
 
+The search capabilities are performed by the MapQuest Open Street Map Nominatim
+service.  This service requires an API key.  Copy the following block of Javascript
+and paste it to app.js inside `$(document).ready(...)` function, above the 
+`Globe` class:
+
+```javascript
+    // Set the MapQuest API key used for the Nominatim service.
+    // Get your own key at https://developer.mapquest.com/
+    // Without your own key you will be using a limited WorldWind developer's key.
+    const MAPQUEST_API_KEY = "";
+```
+
 The [WorldWind.NominatimGeocoder](https://nasaworldwind.github.io/WebWorldWind/NominatimGeocoder.html) 
-encapsulates the MapQuest's Open Street Map Nominatim service. We'll create a 
+encapsulates the MapQuest's Nominatim service for us. We'll create a 
 new `SearchViewModel` to get the user's search text and perform the 
-search. If the search text looks like a latitude, longitude pair (e.g.: 
-"34.2, -119.2") we'll simply center the globe on that location, otherwise we'll use 
-the `NominatimGeocoder` to lookup places that match the search text. The results
-will be displayed in a modal dialog controlled by a new `PreviewViewModel`
+search using the `WorldWind.NominatimGeocoder`. 
+
+Our view model will examine the the search text and if looks like a latitude, 
+longitude pair (e.g.: "34.2, -119.2") we'll simply center the globe on that 
+location, otherwise we'll use the `NominatimGeocoder` to lookup places that 
+match the search text. The results will be displayed in a modal dialog 
+controlled by a new `PreviewViewModel`
 
 Add the following JavaScript code for the `SearchViewModel` to app.js below the 
 `SettingsViewModel`.

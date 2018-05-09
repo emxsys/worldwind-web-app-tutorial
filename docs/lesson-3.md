@@ -3,7 +3,7 @@
 - [Home](index.md) 
 - [Lesson 1: HTML with Bootstrap](lesson-1.md) 
 - [Lesson 2: WorldWind Globe](lesson-2.md) 
-- Lesson 3: Layer Management with Knockout <<
+- Lesson 3: >> Layer Management with Knockout <<
 - [Lesson 4: Place Search and Geocoding](lesson-4.md) 
 
 ## Lesson 3: Layer Management with Knockout
@@ -24,7 +24,7 @@ _bound_ to the HTML views.
 When the view-model data changes, your UI automatically changes.
 
 We will use Knockout hosted on a CDN. Add this line of code to the 
-list of JavaScript scripts at the bottom of your web page:
+list of JavaScript scripts at the bottom of your web page, add it before app.js:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
 ```
@@ -46,7 +46,7 @@ this.categoryTimestamps = new Map();
 ```
 
 Add the following two methods to our `Globe` that operate on the 
-`categoryTimestamps` property.
+`categoryTimestamps` property, place them after the constructor:
 
 ```javascript
 /**
@@ -106,7 +106,7 @@ toggleLayer(layer) {
 ```
 
 And finally, we need to update the category timestamps when we add a layer. 
-Copy/paste this code to the end of our `Globe.addLayers` method:
+Copy/paste this code to the end of our `Globe.addLayer` method:
 
 ```javascript
 // Signal that this layer category has changed
@@ -195,7 +195,8 @@ Knockout [view template](http://knockoutjs.com/documentation/template-binding.ht
 The template 
 
 Add the following script to the web page. Place it close to the elements that will
-use it, like between the `.worldwind-overlay` `<div/>` and the search `#preview` `<div/>`.
+use it, like between the Panels `<div class='globe-overlay'...` and the Search Preview
+Dialog `<div id="preview" ... >`.
 
 ```html
 <!--Layer List Template-->
@@ -226,9 +227,11 @@ In the Settings panel, replace the `.card-body` `<div/>` contents with this HTML
 Add the following JavaScript code to app.js below the globe and layer 
 initialization code:
 ```javascript
-  // Activate the Knockout bindings between our view models and the html
+  // Create the view models
   let layersViewModel = new LayersViewModel(globe);
   let settingsViewModel = new SettingsViewModel(globe);
+
+  // Bind the views to the view models
   ko.applyBindings(layersViewModel, document.getElementById('layers'));
   ko.applyBindings(settingsViewModel, document.getElementById('settings'));
 ```
@@ -286,13 +289,13 @@ In app.js replace the  globe and layer initialization code with this block:
   });
   globe.addLayer(new WorldWind.StarFieldLayer(), {
     category: "setting",
-    enabled: false
+    enabled: false,
     displayName: "Stars"
   });
   globe.addLayer(new WorldWind.AtmosphereLayer(), {
     category: "setting",
     enabled: false,
-    time: null // new Date()
+    time: null // or new Date()
   });
 ```
 
