@@ -193,8 +193,7 @@ function PreviewViewModel(primaryGlobe) {
   this.previewGlobe = new Globe("preview-canvas", "Mercator");
   let resultsLayer = new WorldWind.RenderableLayer("Results");
   let bingMapsLayer = new WorldWind.BingRoadsLayer();
-  bingMapsLayer.detailControl = 1.25; // Show next level-of-detail sooner. Default is 1.75
-  this.previewGlobe.addLayer(bingMapsLayer);
+  this.previewGlobe.addLayer(bingMapsLayer, {detailControl: 1.25}); // Show next level-of-detail sooner. Default is 1.75
   this.previewGlobe.addLayer(resultsLayer);
 
   // Set up the common placemark attributes for the results
@@ -287,7 +286,7 @@ includes the data-bindings for the table row data and the click event handlers:
 
 ```html
 <div id="preview" class="hidden">
-  <div id="previewDialog" class="modal" tabindex="-1" role="dialog">
+  <div id="preview-dialog" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

@@ -360,9 +360,9 @@ $(document).ready(function() {
 ## Summary
 
 
-At this stage you have a functioning prototype of the web app. The menu system is
-functional and responsive:
-
+At this stage you have a functioning prototype of the web app:
+    
+- The menu system is functional and responsive
 - The Layers, Markers and Settings buttons open their respective panels
 - The Search button opens the Preview modal dialog
 - The `<canvas/>` element for the globe that is the full width of the page with
