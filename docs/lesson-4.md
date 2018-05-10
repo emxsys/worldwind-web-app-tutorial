@@ -108,10 +108,10 @@ and paste it to app.js inside `$(document).ready(...)` function, above the
 `Globe` class:
 
 ```javascript
-    // Set the MapQuest API key used for the Nominatim service.
-    // Get your own key at https://developer.mapquest.com/
-    // Without your own key you will be using a limited WorldWind developer's key.
-    const MAPQUEST_API_KEY = "";
+// Set the MapQuest API key used for the Nominatim service.
+// Get your own key at https://developer.mapquest.com/
+// Without your own key you will be using a limited WorldWind developer's key.
+const MAPQUEST_API_KEY = "";
 ```
 
 The [WorldWind.NominatimGeocoder](https://nasaworldwind.github.io/WebWorldWind/NominatimGeocoder.html) 
@@ -137,34 +137,34 @@ Add the following JavaScript code for the `SearchViewModel` to app.js below the
  * @returns {SearchViewModel}
  */
 function SearchViewModel(globe, preview) {
-    var self = this;
-    self.geocoder = new WorldWind.NominatimGeocoder();
-    self.searchText = ko.observable('');
-    self.performSearch = function () {
-        if (!MAPQUEST_API_KEY) {
-            console.error("SearchViewModel: A MapQuest API key is required to use the geocoder in production. Get your API key at https://developer.mapquest.com/");
-        }
-        // Get the value from the observable
-        let queryString = self.searchText();
-        if (queryString) {
-            if (queryString.match(WorldWind.WWUtil.latLonRegex)) {
-                // Treat the text as a lat, lon pair 
-                let tokens = queryString.split(",");
-                let latitude = parseFloat(tokens[0]);
-                let longitude = parseFloat(tokens[1]);
-                // Center the globe on the lat, lon
-                globe.wwd.goTo(new WorldWind.Location(latitude, longitude));
-            } else {
-                // Treat the text as an address or place name
-                self.geocoder.lookup(queryString, function (geocoder, results) {
-                    if (results.length > 0) {
-                        // Open the modal dialog to preview and select a result
-                        preview(results);
-                    }
-                }, MAPQUEST_API_KEY);
-            }
-        }
-    };
+  var self = this;
+  self.geocoder = new WorldWind.NominatimGeocoder();
+  self.searchText = ko.observable('');
+  self.performSearch = function() {
+    if (!MAPQUEST_API_KEY) {
+      console.error("SearchViewModel: A MapQuest API key is required to use the geocoder in production. Get your API key at https://developer.mapquest.com/");
+    }
+    // Get the value from the observable
+    let queryString = self.searchText();
+    if (queryString) {
+      if (queryString.match(WorldWind.WWUtil.latLonRegex)) {
+        // Treat the text as a lat, lon pair 
+        let tokens = queryString.split(",");
+        let latitude = parseFloat(tokens[0]);
+        let longitude = parseFloat(tokens[1]);
+        // Center the globe on the lat, lon
+        globe.wwd.goTo(new WorldWind.Location(latitude, longitude));
+      } else {
+        // Treat the text as an address or place name
+        self.geocoder.lookup(queryString, function(geocoder, results) {
+          if (results.length > 0) {
+            // Open the modal dialog to preview and select a result
+            preview(results);
+          }
+        }, MAPQUEST_API_KEY);
+      }
+    }
+  };
 }
 ```
 
@@ -185,76 +185,76 @@ Add the following JavaScript code for the `PreviewViewModel` to app.js below the
  * @returns {PreviewViewModel}
  */
 function PreviewViewModel(primaryGlobe) {
-    var self = this;
-    // Show a warning message about the MapQuest API key if missing
-    this.showApiWarning = (MAPQUEST_API_KEY === null || MAPQUEST_API_KEY === "");
+  var self = this;
+  // Show a warning message about the MapQuest API key if missing
+  this.showApiWarning = (MAPQUEST_API_KEY === null || MAPQUEST_API_KEY === "");
 
-    // Create secondary globe with a 2D Mercator projection for the preview
-    this.previewGlobe = new Globe("preview-canvas", "Mercator");
-    let resultsLayer = new WorldWind.RenderableLayer("Results");
-    let bingMapsLayer = new WorldWind.BingRoadsLayer();
-    bingMapsLayer.detailControl = 1.25; // Show next level-of-detail sooner. Default is 1.75
-    this.previewGlobe.addLayer(bingMapsLayer);
-    this.previewGlobe.addLayer(resultsLayer);
+  // Create secondary globe with a 2D Mercator projection for the preview
+  this.previewGlobe = new Globe("preview-canvas", "Mercator");
+  let resultsLayer = new WorldWind.RenderableLayer("Results");
+  let bingMapsLayer = new WorldWind.BingRoadsLayer();
+  bingMapsLayer.detailControl = 1.25; // Show next level-of-detail sooner. Default is 1.75
+  this.previewGlobe.addLayer(bingMapsLayer);
+  this.previewGlobe.addLayer(resultsLayer);
 
-    // Set up the common placemark attributes for the results
-    let placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
-    placemarkAttributes.imageSource = WorldWind.configuration.baseUrl + "images/pushpins/castshadow-red.png";
-    placemarkAttributes.imageScale = 0.5;
-    placemarkAttributes.imageOffset = new WorldWind.Offset(
-        WorldWind.OFFSET_FRACTION, 0.3,
-        WorldWind.OFFSET_FRACTION, 0.0);
+  // Set up the common placemark attributes for the results
+  let placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
+  placemarkAttributes.imageSource = WorldWind.configuration.baseUrl + "images/pushpins/castshadow-red.png";
+  placemarkAttributes.imageScale = 0.5;
+  placemarkAttributes.imageOffset = new WorldWind.Offset(
+    WorldWind.OFFSET_FRACTION, 0.3,
+    WorldWind.OFFSET_FRACTION, 0.0);
 
-    // Create an observable array who's contents are displayed in the preview
-    this.searchResults = ko.observableArray();
-    this.selected = ko.observable();
+  // Create an observable array who's contents are displayed in the preview
+  this.searchResults = ko.observableArray();
+  this.selected = ko.observable();
 
-    // Shows the given search results in a table with a preview globe/map
-    this.previewResults = function (results) {
-        if (results.length === 0) {
-            return;
-        }
-        // Clear the previous results
-        self.searchResults.removeAll();
-        resultsLayer.removeAllRenderables();
-        // Add the results to the observable array
-        results.map(item => self.searchResults.push(item));
-        // Create a simple placemark for each result
-        for (let i = 0, max = results.length; i < max; i++) {
-            let item = results[i];
-            let placemark = new WorldWind.Placemark(
-                new WorldWind.Position(
-                    parseFloat(item.lat),
-                    parseFloat(item.lon), 100));
-            placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-            placemark.displayName = item.display_name;
-            placemark.attributes = placemarkAttributes;
-            resultsLayer.addRenderable(placemark);
-        }
+  // Shows the given search results in a table with a preview globe/map
+  this.previewResults = function(results) {
+    if (results.length === 0) {
+      return;
+    }
+    // Clear the previous results
+    self.searchResults.removeAll();
+    resultsLayer.removeAllRenderables();
+    // Add the results to the observable array
+    results.map(item => self.searchResults.push(item));
+    // Create a simple placemark for each result
+    for (let i = 0, max = results.length; i < max; i++) {
+      let item = results[i];
+      let placemark = new WorldWind.Placemark(
+        new WorldWind.Position(
+          parseFloat(item.lat),
+          parseFloat(item.lon), 100));
+      placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+      placemark.displayName = item.display_name;
+      placemark.attributes = placemarkAttributes;
+      resultsLayer.addRenderable(placemark);
+    }
 
-        // Initialize preview with the first item
-        self.previewSelection(results[0]);
-        // Display the preview dialog
-        $('#previewDialog').modal();
-        $('#previewDialog .modal-body-table').scrollTop(0);
-    };
+    // Initialize preview with the first item
+    self.previewSelection(results[0]);
+    // Display the preview dialog
+    $('#preview-dialog').modal();
+    $('#preview-dialog .modal-body-table').scrollTop(0);
+  };
 
-    // Center's the preview globe on the selection and sets the selected item.
-    this.previewSelection = function (selection) {
-        let latitude = parseFloat(selection.lat),
-            longitude = parseFloat(selection.lon),
-            location = new WorldWind.Location(latitude, longitude);
-        // Update our observable holding the selected location
-        self.selected(location);
-        // Go to the posiion
-        self.previewGlobe.wwd.goTo(location);
-    };
+  // Center's the preview globe on the selection and sets the selected item.
+  this.previewSelection = function(selection) {
+    let latitude = parseFloat(selection.lat),
+      longitude = parseFloat(selection.lon),
+      location = new WorldWind.Location(latitude, longitude);
+    // Update our observable holding the selected location
+    self.selected(location);
+    // Go to the posiion
+    self.previewGlobe.wwd.goTo(location);
+  };
 
-    // Centers the primary globe on the selected item
-    this.gotoSelected = function () {
-        // Go to the location held in the selected observable
-        primaryGlobe.wwd.goTo(self.selected());
-    };
+  // Centers the primary globe on the selected item
+  this.gotoSelected = function() {
+    // Go to the location held in the selected observable
+    primaryGlobe.wwd.goTo(self.selected());
+  };
 }
 ```
 

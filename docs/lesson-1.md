@@ -92,18 +92,19 @@ section:
 
 ###### HTML
 ```html
+<!--Main menu content-->
 <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
 
   <!--Branding icon and text-->
   <a class="navbar-brand" href="https://worldwind.arc.nasa.gov/web target=_blank">
-    <img src="images/nasa-logo_32.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    WorldWind
-  </a>
+            <img src="images/nasa-logo_32.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            WorldWind
+        </a>
 
   <!--Hamburger menu displayed on small screens/windows-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
   <!--Main menu content-->
   <div class="collapse navbar-collapse" id="main-menu">
@@ -111,31 +112,31 @@ section:
       <!--Layers-->
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#layers" role="button">
-                <span class="fas fa-list" aria-hidden="true"></span>
-                <span class="d-md-none d-lg-inline" aria-hidden="true">Layers</span>
-        </a>
+                        <span class="fas fa-list" aria-hidden="true"></span>
+                        <span class="d-md-none d-lg-inline" aria-hidden="true">Layers</span>
+                    </a>
       </li>
       <!--Markers-->
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#markers" role="button">
-                <span class="fas fa-map-marker-alt" aria-hidden="true"></span>
-                <span class="d-md-none d-lg-inline" aria-hidden="true">Markers</span>
-        </a>
+                        <span class="fas fa-map-marker-alt" aria-hidden="true"></span>
+                        <span class="d-md-none d-lg-inline" aria-hidden="true">Markers</span>
+                    </a>
       </li>
       <!--Settings-->
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#settings" role="button">
-                <span class="fas fa-cog" aria-hidden="true"></span>
-                <span class="d-md-none d-lg-inline" aria-hidden="true">Settings</span>
-        </a>
+                        <span class="fas fa-cog" aria-hidden="true"></span>
+                        <span class="d-md-none d-lg-inline" aria-hidden="true">Settings</span>
+                    </a>
       </li>
     </ul>
     <!--Search Box-->
     <div class="form-inline">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" data-toggle="modal" data-target="#preview">
-            <span class="fas fa-search" aria-hidden="true"></span>
-        </button>
+      <button class="btn btn-outline-success" data-toggle="modal" data-target="#preview-dialog">
+                    <span class="fas fa-search" aria-hidden="true"></span>
+                </button>
     </div>
   </div>
 </nav>
@@ -167,17 +168,16 @@ element.
 <!-- Use container-fluid for 100% width and set padding to 0 -->
 <main role="main" class="container-fluid p-0">
   <!-- Globe -->
-  <div id="globe" class="worldwindow">
+  <div id="globe" class="globe">
     <!--.d-block ensures the size is correct (prevents a scrollbar from appearing)-->
-    <canvas id="globe-canvas" class="d-block"
-            style="width: 100%; height: 100%; 
-            background-color: rgb(36,74,101);">
-        Try Chrome or FireFox.
-    </canvas>   
+    <canvas id="globe-canvas" class="d-block" style="width: 100%; height: 100%; 
+                    background-color: rgb(36,74,101);">
+                Try Chrome or FireFox.
+            </canvas>
   </div>
 
   <!--Panels-->
-  <div class="worldwindow-overlay noninteractive w-100">
+  <div class="globe-overlay noninteractive w-100">
     <div class="card-columns">
       <!--Layers-->
       <div class="collapse" id="layers">
@@ -190,7 +190,7 @@ element.
                                 </button></h5>
           </div>
           <div class="card-body">
-            <p class="card-text">Marker list goes here.</p>
+            <p class="card-text">Layer list goes here.</p>
           </div>
         </div>
       </div>
@@ -225,16 +225,17 @@ element.
         </div>
       </div>
     </div>
-
-    <!--Search Preview Dialog-->
-    <div id="preview" class="modal" tabindex="-1" role="dialog">
+  </div>
+  <!--Search Preview Dialog-->
+  <div id="preview">
+    <div id="preview-dialog" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Search Results</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
           </div>
           <div class="modal-body">
             <p>
@@ -248,7 +249,9 @@ element.
         </div>
       </div>
     </div>
+  </div>
 </main>
+
 ```
 
 Also copy/paste the following CSS into the custom.css file. This CSS adds some 
@@ -262,16 +265,50 @@ body {
   padding-top: 3.5rem;
 }
 
-.worldwindow {
+/*Sets the size and style of the globe container*/
+.globe {
   width: 100%;
   height: calc(100vh - 3.5rem);
   background-color: black;
 }
 
-.worldwindow-overlay {
+/*Sets the position of a container displayed over the globe container*/
+.globe-overlay {
   position: absolute;
   width: 100%;
   top: 3.5rem;
+}
+
+Sets the background color of Cards displayed over the globe .globe-card {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/*When the modal fills the screen it has no margin on top and bottom*/
+/*Centers the modal*/
+.modal-dialog {
+  margin: 0 auto;
+}
+
+/*Sets the maximum height of the entire modal to 100% of the screen height*/
+.modal-content {
+  max-height: 100vh;
+}
+
+/*Sets the maximum height of the modal body to 90% of the screen height*/
+.modal-body {
+  max-height: 90vh;
+}
+
+/*Sets the height of a modal's canvas to 30% or 200px*/
+.modal-body-canvas {
+  max-height: 200px;
+  height: 30vh;
+}
+
+/*Sets the height of a modal's canvas to 60% minus the height of a footer*/
+.modal-body-table {
+  max-height: calc(60vh - 71px);
+  overflow-y: auto;
 }
 
 /* Prevents an element, like a <div/> from consuming user input */

@@ -227,13 +227,13 @@ In the Settings panel, replace the `.card-body` `<div/>` contents with this HTML
 Add the following JavaScript code to app.js below the globe and layer 
 initialization code:
 ```javascript
-  // Create the view models
-  let layersViewModel = new LayersViewModel(globe);
-  let settingsViewModel = new SettingsViewModel(globe);
+// Create the view models
+let layers = new LayersViewModel(globe);
+let settings = new SettingsViewModel(globe);
 
-  // Bind the views to the view models
-  ko.applyBindings(layersViewModel, document.getElementById('layers'));
-  ko.applyBindings(settingsViewModel, document.getElementById('settings'));
+// Bind the views to the view models
+ko.applyBindings(layers, document.getElementById('layers'));
+ko.applyBindings(settings, document.getElementById('settings'));
 ```
 
 ### Make it interesting: Add more layers
@@ -244,19 +244,19 @@ and paste it to app.js inside `$(document).ready(...)` function, above the
 `Globe` class:
 
 ```javascript
-    // Set the Bing API key for Bing Maps
-    // Without your own key you will be using a limited WorldWind developer's key.
-    // See: https://www.bingmapsportal.com/ to register for your own key and then enter it below:
-    const BING_API_KEY = "";
-    if (BING_API_KEY) {
-        // Initialize WorldWind properties before creating the first WorldWindow
-        WorldWind.BingMapsKey = BING_API_KEY;
-    } else {
-        console.error("app.js: A Bing API key is required to use the Bing maps in production. Get your API key at https://www.bingmapsportal.com/");
-    }
+// Set the Bing API key for Bing Maps
+// Without your own key you will be using a limited WorldWind developer's key.
+// See: https://www.bingmapsportal.com/ to register for your own key and then enter it below:
+const BING_API_KEY = "";
+if (BING_API_KEY) {
+    // Initialize WorldWind properties before creating the first WorldWindow
+    WorldWind.BingMapsKey = BING_API_KEY;
+} else {
+    console.error("app.js: A Bing API key is required to use the Bing maps in production. Get your API key at https://www.bingmapsportal.com/");
+}
 ```
 
-We well add some more layers to the web app and we'll explore a few of the 
+Now we will add some more layers to the web app and explore a few of the 
 [WorldWind.Layer](https://nasaworldwind.github.io/WebWorldWind/Layer.html) 
 properties that we can set via the options object, such as:
 

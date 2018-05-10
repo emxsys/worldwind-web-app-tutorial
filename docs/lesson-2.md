@@ -88,20 +88,20 @@ class Globe {
     this.wwd.addLayer(layer);
   }
 
-    /**
-     * Returns a new array of layers in the given category.
-     * @param {String} category E.g., "base", "overlay" or "setting".
-     * @returns {Array}
-     */
+  /**
+   * Returns a new array of layers in the given category.
+   * @param {String} category E.g., "base", "overlay" or "setting".
+   * @returns {Array}
+   */
   getLayers(category) {
     return this.wwd.layers.filter(layer => layer.category === category);
   }
 }
 ```
 
-Now you create a `Globe` object with it's underlying `WorldWindow` like this: 
+Now you can create a `Globe` object with it's underlying `WorldWindow` like this: 
 ```javascript
-  let globe = new Globe("globe-canvas");
+let globe = new Globe("globe-canvas");
 ```
 where "globe-canvas" is the name of a `<canvas/>` element in your HTML.
 
